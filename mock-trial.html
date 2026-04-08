@@ -1,0 +1,3197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Right to Dream Mock Trial — Student Resource Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #1F4E79;
+  --navy-dark: #163a5c;
+  --navy-light: #2a6199;
+  --gold: #C9A84C;
+  --gold-light: #e8c96a;
+  --gold-dark: #a8873a;
+  --white: #ffffff;
+  --gray-50: #f8f9fa;
+  --gray-100: #f0f2f5;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-500: #64748b;
+  --gray-700: #334155;
+  --gray-900: #0f172a;
+  --green: #16a34a;
+  --red: #dc2626;
+  --amber: #d97706;
+  --purple: #7c3aed;
+  --sidebar-w: 260px;
+  --topbar-h: 64px;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+  --transition: 0.22s ease;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-900);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 { font-family: 'Merriweather', serif; }
+
+a { color: var(--navy-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+#topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  gap: 16px;
+}
+
+#topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+#topbar .brand i { color: var(--gold); font-size: 1.4rem; }
+#topbar .brand-text { line-height: 1.2; }
+#topbar .brand-title {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+#topbar .brand-sub {
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  letter-spacing: 0.04em;
+}
+
+#hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+#layout {
+  display: flex;
+  padding-top: var(--topbar-h);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+#sidebar {
+  width: var(--sidebar-w);
+  background: var(--navy-dark);
+  position: fixed;
+  top: var(--topbar-h);
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 150;
+  transition: transform var(--transition);
+  scrollbar-width: thin;
+  scrollbar-color: var(--navy-light) transparent;
+}
+
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--navy-light); border-radius: 2px; }
+
+.sidebar-section {
+  padding: 12px 0 4px;
+}
+
+.sidebar-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  text-transform: uppercase;
+  padding: 0 18px 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  color: rgba(255,255,255,0.78);
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  border-left: 3px solid transparent;
+  user-select: none;
+}
+
+.nav-item i {
+  width: 18px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+}
+
+.nav-item.active {
+  background: rgba(201,168,76,0.15);
+  color: var(--white);
+  border-left-color: var(--gold);
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 8px 18px;
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+#main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: calc(100vh - var(--topbar-h));
+}
+
+.page {
+  display: none;
+  padding: 36px 40px 60px;
+  max-width: 980px;
+  animation: fadeIn 0.28s ease;
+}
+
+.page.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb i { font-size: 0.7rem; }
+.breadcrumb .crumb { color: var(--gray-500); }
+.breadcrumb .crumb.current { color: var(--navy); font-weight: 600; }
+.breadcrumb .sep { color: var(--gray-300); }
+
+/* ============================================================
+   PAGE HEADERS
+   ============================================================ */
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.page-header .subtitle {
+  font-size: 1rem;
+  color: var(--gray-500);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.page-header .header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 12px;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section-title {
+  font-size: 1.3rem;
+  color: var(--navy);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i { color: var(--gold); }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(31,78,121,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.card-title { font-size: 1.05rem; font-family: 'Merriweather', serif; color: var(--navy); }
+.card-sub { font-size: 0.82rem; color: var(--gray-500); margin-top: 2px; }
+
+/* ============================================================
+   CALLOUT BOXES
+   ============================================================ */
+.callout {
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 20px 0;
+  display: flex;
+  gap: 14px;
+}
+
+.callout i { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+.callout.gold { background: rgba(201,168,76,0.12); border-left: 4px solid var(--gold); }
+.callout.gold i { color: var(--gold-dark); }
+
+.callout.navy { background: rgba(31,78,121,0.08); border-left: 4px solid var(--navy); }
+.callout.navy i { color: var(--navy); }
+
+.callout.green { background: rgba(22,163,74,0.08); border-left: 4px solid var(--green); }
+.callout.green i { color: var(--green); }
+
+.callout.red { background: rgba(220,38,38,0.08); border-left: 4px solid var(--red); }
+.callout.red i { color: var(--red); }
+
+.callout.purple { background: rgba(124,58,237,0.08); border-left: 4px solid var(--purple); }
+.callout.purple i { color: var(--purple); }
+
+.callout-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 4px; }
+.callout p { font-size: 0.88rem; line-height: 1.6; }
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge.prosecution { background: rgba(220,38,38,0.1); color: #b91c1c; }
+.badge.defense { background: rgba(31,78,121,0.1); color: var(--navy); }
+.badge.case1 { background: rgba(201,168,76,0.15); color: var(--gold-dark); }
+.badge.case2 { background: rgba(124,58,237,0.1); color: var(--purple); }
+.badge.both { background: rgba(22,163,74,0.1); color: #15803d; }
+
+/* ============================================================
+   TWO-COLUMN GRIDS
+   ============================================================ */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+.divider {
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin: 28px 0;
+  border: none;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transition);
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary { background: var(--navy); color: var(--white); }
+.btn-primary:hover { background: var(--navy-light); }
+
+.btn-gold { background: var(--gold); color: var(--navy-dark); }
+.btn-gold:hover { background: var(--gold-light); }
+
+.btn-outline { background: transparent; color: var(--navy); border-color: var(--navy); }
+.btn-outline:hover { background: var(--navy); color: var(--white); }
+
+.btn-filter {
+  background: var(--white);
+  color: var(--gray-700);
+  border: 2px solid var(--gray-200);
+  padding: 7px 15px;
+  font-size: 0.82rem;
+}
+
+.btn-filter:hover { border-color: var(--navy); color: var(--navy); }
+.btn-filter.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+.icon-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.icon-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.icon-list li i { color: var(--gold); flex-shrink: 0; margin-top: 2px; font-size: 0.85rem; }
+
+/* ============================================================
+   TABLE
+   ============================================================ */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+}
+.styled-table th {
+  background: var(--navy);
+  color: var(--white);
+  padding: 12px 14px;
+  text-align: left;
+  font-family: 'Merriweather', serif;
+  font-size: 0.82rem;
+}
+.styled-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.styled-table tr:hover td { background: var(--gray-50); }
+.styled-table tr:last-child td { border-bottom: none; }
+
+/* ============================================================
+   TAGS
+   ============================================================ */
+.tag {
+  display: inline-block;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin: 2px;
+}
+
+/* ============================================================
+   SEARCH INPUT
+   ============================================================ */
+.search-wrap {
+  position: relative;
+  margin-bottom: 24px;
+}
+.search-wrap i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+}
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border: 2px solid var(--gray-200);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  transition: border-color var(--transition);
+  background: var(--white);
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--navy);
+}
+
+/* ============================================================
+   CHECKLIST
+   ============================================================ */
+.checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.checklist input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--navy);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.checklist label { cursor: pointer; }
+.checklist input:checked + label { text-decoration: line-through; color: var(--gray-500); }
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--gold), var(--navy));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -27px;
+  top: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 3px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-dot i { color: var(--white); font-size: 0.55rem; }
+
+.timeline-content {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+
+.timeline-step {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.timeline-body { font-size: 0.88rem; line-height: 1.6; color: var(--gray-700); }
+
+/* ============================================================
+   COURTROOM DIAGRAM
+   ============================================================ */
+.courtroom {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  font-size: 0.78rem;
+}
+
+.courtroom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  text-align: center;
+}
+
+.court-seat {
+  background: var(--gray-100);
+  border-radius: 8px;
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.court-seat i { font-size: 1.2rem; }
+.court-seat.navy-seat { background: rgba(31,78,121,0.1); color: var(--navy); }
+.court-seat.gold-seat { background: rgba(201,168,76,0.15); color: var(--gold-dark); }
+.court-seat.gray-seat { background: var(--gray-100); color: var(--gray-700); }
+.court-seat .label { font-weight: 600; font-size: 0.75rem; }
+.court-seat .role-desc { font-size: 0.68rem; color: var(--gray-500); }
+
+.court-full { grid-column: 1 / -1; }
+.court-half { grid-column: span 1; }
+
+/* ============================================================
+   WITNESS CARDS
+   ============================================================ */
+.witness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.witness-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.witness-card.hidden {
+  display: none;
+}
+
+.witness-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.witness-card-top {
+  background: var(--navy);
+  padding: 18px 20px 14px;
+  position: relative;
+}
+
+.witness-card-top.defense-top { background: var(--navy-light); }
+
+.witness-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.witness-name { font-family: 'Merriweather', serif; color: var(--white); font-size: 1rem; margin-bottom: 2px; }
+.witness-role { color: rgba(255,255,255,0.75); font-size: 0.8rem; }
+
+.witness-badges {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.witness-body { padding: 18px 20px; }
+
+.witness-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--gray-500);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.witness-section-title i { color: var(--gold); }
+
+.witness-text { font-size: 0.85rem; line-height: 1.55; color: var(--gray-700); margin-bottom: 14px; }
+
+.vuln-box {
+  background: rgba(220,38,38,0.06);
+  border-radius: 7px;
+  padding: 10px 12px;
+}
+
+.vuln-box .witness-section-title i { color: var(--red); }
+
+/* ============================================================
+   GLOSSARY
+   ============================================================ */
+.glossary-list { display: flex; flex-direction: column; gap: 4px; }
+
+.gloss-item {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  transition: opacity var(--transition);
+}
+
+.gloss-item.hidden { display: none; }
+
+.gloss-term {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  cursor: pointer;
+  background: var(--white);
+  transition: background var(--transition);
+}
+
+.gloss-term:hover { background: var(--gray-50); }
+
+.gloss-term-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gloss-term-name i { color: var(--gold); font-size: 0.8rem; }
+
+.gloss-arrow {
+  color: var(--gray-500);
+  transition: transform var(--transition);
+  font-size: 0.8rem;
+}
+
+.gloss-item.open .gloss-arrow { transform: rotate(180deg); }
+.gloss-item.open .gloss-term { background: var(--navy); }
+.gloss-item.open .gloss-term-name { color: var(--white); }
+.gloss-item.open .gloss-term-name i { color: var(--gold); }
+.gloss-item.open .gloss-arrow { color: var(--gold); }
+
+.gloss-def {
+  display: none;
+  padding: 14px 16px;
+  background: var(--gray-50);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--gray-700);
+  border-top: 1px solid var(--gray-200);
+}
+
+.gloss-item.open .gloss-def { display: block; }
+
+.gloss-def .latin { font-style: italic; color: var(--navy); font-weight: 600; }
+.gloss-def .example { margin-top: 8px; padding: 8px 12px; background: rgba(201,168,76,0.12); border-radius: 6px; font-size: 0.84rem; }
+.gloss-def .example::before { content: "Example: "; font-weight: 700; }
+
+/* ============================================================
+   ROLE CARDS
+   ============================================================ */
+.role-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.role-card-header {
+  background: var(--navy);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.role-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.role-card-header h3 { color: var(--white); font-size: 1.1rem; }
+.role-card-header .role-tagline { color: rgba(255,255,255,0.75); font-size: 0.82rem; font-family: 'Inter', sans-serif; margin-top: 2px; }
+
+.role-body { padding: 22px 24px; }
+
+.role-section {
+  margin-bottom: 16px;
+}
+
+.role-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--gray-500);
+  margin-bottom: 8px;
+}
+
+.role-section-header i { color: var(--gold); }
+
+.dos-donts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.do-box { background: rgba(22,163,74,0.07); border-radius: 8px; padding: 12px; }
+.dont-box { background: rgba(220,38,38,0.07); border-radius: 8px; padding: 12px; }
+
+.do-box h5 { color: var(--green); font-size: 0.78rem; margin-bottom: 6px; }
+.dont-box h5 { color: var(--red); font-size: 0.78rem; margin-bottom: 6px; }
+
+.sample-phrase {
+  background: rgba(31,78,121,0.07);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-style: italic;
+  font-size: 0.86rem;
+  color: var(--navy);
+  margin-top: 8px;
+  border-left: 3px solid var(--navy);
+}
+
+.sample-phrase::before { content: '"'; }
+.sample-phrase::after { content: '"'; }
+
+/* ============================================================
+   KEY QUESTIONS
+   ============================================================ */
+.question-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.question-header {
+  background: var(--navy);
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.question-num {
+  background: var(--gold);
+  color: var(--navy);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.question-text {
+  color: var(--white);
+  font-family: 'Merriweather', serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.question-body { display: grid; grid-template-columns: 1fr 1fr; }
+
+.for-side, .against-side { padding: 18px 20px; }
+.for-side { border-right: 1px solid var(--gray-100); }
+
+.side-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.for-label { color: var(--green); }
+.against-label { color: var(--red); }
+
+.arg-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.arg-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+.arg-list li i { flex-shrink: 0; margin-top: 2px; font-size: 0.75rem; }
+.for-side .arg-list li i { color: var(--green); }
+.against-side .arg-list li i { color: var(--red); }
+
+/* ============================================================
+   HOME PAGE
+   ============================================================ */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  border-radius: 16px;
+  padding: 40px 40px;
+  color: var(--white);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '\f19d';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8rem;
+  color: rgba(255,255,255,0.05);
+}
+
+.hero h1 { font-size: 2.1rem; margin-bottom: 10px; }
+.hero p { font-size: 1rem; opacity: 0.85; line-height: 1.65; max-width: 580px; }
+
+.hero-badges { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 0.82rem;
+  color: var(--white);
+}
+
+.case-preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 28px; }
+
+.case-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.case-card-top {
+  padding: 20px;
+  background: var(--navy);
+}
+
+.case-card-top.case2-top { background: var(--purple); }
+
+.case-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.case-card-top h3 { color: var(--white); font-size: 1rem; line-height: 1.3; }
+.case-card-body { padding: 16px 20px; font-size: 0.86rem; }
+.case-card-body .charge { color: var(--gray-500); margin-bottom: 10px; font-style: italic; }
+
+.start-here-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+
+.role-quick-card {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 18px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  border-bottom: 3px solid transparent;
+}
+
+.role-quick-card:hover { border-bottom-color: var(--gold); transform: translateY(-2px); }
+.role-quick-card i { font-size: 1.8rem; color: var(--navy); margin-bottom: 8px; display: block; }
+.role-quick-card h4 { font-size: 0.9rem; color: var(--navy); margin-bottom: 4px; }
+.role-quick-card p { font-size: 0.76rem; color: var(--gray-500); line-height: 1.45; }
+
+/* ============================================================
+   EXHIBIT TABLE STYLING
+   ============================================================ */
+.exhibit-badge {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--white);
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   OBJECTIONS TABLE
+   ============================================================ */
+.objection-card {
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.objection-name {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 0.92rem;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.objection-name i { color: var(--gold); }
+
+.objection-when { font-size: 0.82rem; color: var(--gray-700); margin-bottom: 6px; }
+.objection-say { font-style: italic; font-size: 0.84rem; color: var(--navy); background: var(--gray-50); padding: 6px 10px; border-radius: 6px; }
+
+/* ============================================================
+   MOTIVATIONAL
+   ============================================================ */
+.motivational {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  border-radius: var(--radius);
+  padding: 30px 32px;
+  text-align: center;
+  margin-top: 32px;
+}
+
+.motivational h3 { color: var(--navy); font-size: 1.3rem; margin-bottom: 8px; }
+.motivational p { color: var(--navy-dark); font-size: 0.92rem; line-height: 1.6; }
+
+/* ============================================================
+   PILL TABS (within page)
+   ============================================================ */
+.pill-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+
+.pill-tab {
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  color: var(--gray-700);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: 'Inter', sans-serif;
+}
+
+.pill-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.pill-tab:hover:not(.active) { border-color: var(--navy); color: var(--navy); }
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  #sidebar, #topbar, #hamburger, .btn-filter, .pill-tabs, .search-wrap { display: none !important; }
+  #main { margin-left: 0 !important; }
+  .page { display: block !important; padding: 20px !important; page-break-after: always; }
+  .witness-card, .role-card, .card { box-shadow: none !important; border: 1px solid #ccc; }
+  body { font-size: 12px; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+
+  #sidebar {
+    transform: translateX(-260px);
+    width: 260px;
+  }
+
+  #sidebar.open { transform: translateX(0); }
+
+  #hamburger { display: flex; }
+
+  #main { margin-left: 0; }
+
+  .page { padding: 24px 20px 48px; }
+
+  .grid-2, .case-preview-grid { grid-template-columns: 1fr; }
+  .grid-3, .start-here-grid { grid-template-columns: 1fr 1fr; }
+  .question-body { grid-template-columns: 1fr; }
+  .for-side { border-right: none; border-bottom: 1px solid var(--gray-100); }
+  .dos-donts { grid-template-columns: 1fr; }
+  .courtroom-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 540px) {
+  .grid-3, .start-here-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.5rem; }
+  .page-header h1 { font-size: 1.5rem; }
+  .witness-grid { grid-template-columns: 1fr; }
+}
+
+/* overlay when sidebar is open on mobile */
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 140;
+}
+
+#overlay.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header id="topbar">
+  <div class="brand">
+    <img src="rtd-logo.png" id="rtd-logo" style="height:44px; width:44px; border-radius:50%; object-fit:cover; flex-shrink:0;" alt="Right to Dream San Diego Logo">
+    <div class="brand-text">
+      <div class="brand-title">Right to Dream Mock Trial</div>
+      <div class="brand-sub">Student Resource Center</div>
+    </div>
+  </div>
+  <button id="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>
+
+<div id="overlay" onclick="closeSidebar()"></div>
+
+<div id="layout">
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Get Started</div>
+    <div class="nav-item active" onclick="showPage('home')">
+      <i class="fas fa-home"></i> Home &amp; Welcome
+    </div>
+  </div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">The Cases</div>
+    <div class="nav-item" onclick="showPage('case1')">
+      <i class="fas fa-users"></i> Case 1: Hazing
+    </div>
+    <div class="nav-item" onclick="showPage('case2')">
+      <i class="fas fa-feather-pointed"></i> Case 2: MBTA
+    </div>
+  </div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">People &amp; Process</div>
+    <div class="nav-item" onclick="showPage('witnesses')">
+      <i class="fas fa-user-group"></i> Witness Roster
+    </div>
+    <div class="nav-item" onclick="showPage('howtrial')">
+      <i class="fas fa-gavel"></i> How a Trial Works
+    </div>
+    <div class="nav-item" onclick="showPage('roles')">
+      <i class="fas fa-id-badge"></i> Roles &amp; Responsibilities
+    </div>
+  </div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-label">Study Tools</div>
+    <div class="nav-item" onclick="showPage('glossary')">
+      <i class="fas fa-book-open"></i> Legal Glossary
+    </div>
+    <div class="nav-item" onclick="showPage('preptips')">
+      <i class="fas fa-clipboard-check"></i> Preparation Tips
+    </div>
+    <div class="nav-item" onclick="showPage('keyquestions')">
+      <i class="fas fa-question-circle"></i> Key Legal Questions
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+<!-- ================================================================
+     PAGE: HOME
+     ================================================================ -->
+<section class="page active" id="page-home">
+  <div class="breadcrumb">
+    <span class="crumb"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Welcome</span>
+  </div>
+
+  <div class="hero">
+    <h1>Welcome to Right to Dream Mock Trial!</h1>
+    <p>You're about to step into a real courtroom scenario involving two connected cases — one about hazing on a college sports team, and one about a young man who accidentally disturbed a protected owl's nest. This resource will help you prepare for every role, understand the law, and bring your best to the courtroom.</p>
+    <div class="hero-badges">
+      <span class="hero-badge"><i class="fas fa-gavel"></i> 2 Cases</span>
+      <span class="hero-badge"><i class="fas fa-user-group"></i> 12 Witnesses</span>
+      <span class="hero-badge"><i class="fas fa-book-open"></i> 30+ Legal Terms</span>
+      <span class="hero-badge"><i class="fas fa-star"></i> Real California Law</span>
+    </div>
+  </div>
+
+  <div class="section-title"><i class="fas fa-binoculars"></i> The Two Cases at a Glance</div>
+
+  <div class="case-preview-grid">
+    <div class="case-card" onclick="showPage('case1')">
+      <div class="case-card-top">
+        <div class="case-label">Case 1</div>
+        <h3>State v. UEC Soccer Team</h3>
+      </div>
+      <div class="case-card-body">
+        <div class="charge">California Education Code § 32050 — Criminal Hazing</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-circle-dot"></i> A "good luck charm" tradition pressured new players</li>
+          <li><i class="fas fa-circle-dot"></i> Freshman Freddy Suares climbed a tree and was injured</li>
+          <li><i class="fas fa-circle-dot"></i> Did team leaders create an environment of coercion?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="case-card" onclick="showPage('case2')">
+      <div class="case-card-top case2-top">
+        <div class="case-label">Case 2</div>
+        <h3>The People v. Freddy Suares</h3>
+      </div>
+      <div class="case-card-body">
+        <div class="charge">MBTA 16 U.S.C. § 703 &amp; CA Fish &amp; Game Code § 86</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-circle-dot"></i> Two California Spotted Owl chicks died in the fall</li>
+          <li><i class="fas fa-circle-dot"></i> Did Freddy "take" a protected bird under federal law?</li>
+          <li><i class="fas fa-circle-dot"></i> The big debate: strict liability vs. knowing intent</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-map-signs"></i> Start Here — Find Your Role</div>
+  <p style="font-size:0.92rem; color: var(--gray-700); margin-bottom: 20px;">Not sure where to begin? Click your role below to jump straight to what you need.</p>
+
+  <div class="start-here-grid">
+    <div class="role-quick-card" onclick="showPage('roles')">
+      <i class="fas fa-person-chalkboard"></i>
+      <h4>Attorney</h4>
+      <p>Opening &amp; closing tips, how to object, and how to question witnesses</p>
+    </div>
+    <div class="role-quick-card" onclick="showPage('witnesses')">
+      <i class="fas fa-user-tie"></i>
+      <h4>Witness</h4>
+      <p>Who you are, what to say, and how to handle cross-examination</p>
+    </div>
+    <div class="role-quick-card" onclick="showPage('roles')">
+      <i class="fas fa-scale-balanced"></i>
+      <h4>Juror</h4>
+      <p>Your job, how to deliberate, and what the verdict means</p>
+    </div>
+    <div class="role-quick-card" onclick="showPage('howtrial')">
+      <i class="fas fa-gavel"></i>
+      <h4>Judge</h4>
+      <p>Running the courtroom, ruling on objections, and staying neutral</p>
+    </div>
+    <div class="role-quick-card" onclick="showPage('glossary')">
+      <i class="fas fa-book-open"></i>
+      <h4>New to Law?</h4>
+      <p>Start with the glossary — 30+ plain-English definitions</p>
+    </div>
+    <div class="role-quick-card" onclick="showPage('preptips')">
+      <i class="fas fa-clipboard-check"></i>
+      <h4>Everyone</h4>
+      <p>Checklists, common mistakes, and last-minute prep tips</p>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <i class="fas fa-lightbulb"></i>
+    <div>
+      <div class="callout-title">Why This Mock Trial Is Unique</div>
+      <p>Most cases involve one defendant and one crime. This trial involves two separate cases that both grew out of the <em>same incident</em> on September 14th. That means the facts overlap — what you hear in one case may matter in the other. Pay close attention to everything!</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PAGE: CASE 1 — HAZING
+     ================================================================ -->
+<section class="page" id="page-case1">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Case 1: Hazing</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon"><i class="fas fa-users"></i></div>
+    <h1>State v. UEC Soccer Team</h1>
+    <div class="subtitle">Criminal Hazing · California Education Code § 32050</div>
+  </div>
+
+  <div class="callout gold">
+    <i class="fas fa-star"></i>
+    <div>
+      <div class="callout-title">Why This Matters in Real Life</div>
+      <p>Hazing is a serious problem on college campuses across the country — and it causes real harm. California's hazing law exists because many hazing traditions don't look dangerous on the surface, but create enormous social pressure that leads students to take risks they never would have taken otherwise. This case asks: when does a fun team tradition become a crime?</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-file-lines"></i> Background: University of El Cajon</div>
+  <div class="card">
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom: 12px;">The University of El Cajon (UEC) is a mid-sized public university in El Cajon, California. Its mascot is the Great Owl, and the campus is known for its mature oak and eucalyptus trees. The men's and women's soccer programs are highly competitive.</p>
+
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom: 12px;">For at least six years, new players joining the UEC soccer team have participated in a tradition tied to the team's first match. Returning players informally told new recruits that each newcomer was expected to bring a <strong>"good luck charm"</strong> — something "unique and impressive" — specifically, "a selfie from a place no one has ever been or would expect to see a selfie from."</p>
+
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom: 12px;">Returning players shared past examples in the team group chat, including selfies from a rooftop reached by climbing a locked ladder, and from inside a locked campus mechanical room. New players were never explicitly told what would happen if they didn't participate — but socially, those with impressive charms were celebrated, and those without were subtly excluded and passed to less during early games.</p>
+
+    <p style="line-height:1.7; font-size:0.92rem;">There is no written record of this tradition. Head Coach Renata Villanueva said she was unaware that it involved any physical risk.</p>
+  </div>
+
+  <div class="section-title"><i class="fas fa-person-falling"></i> What Happened: Freddy Suares</div>
+  <div class="card">
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom: 12px;">Freddy Suares is an 18-year-old freshman from San Diego on a soccer scholarship. About two weeks before the first match, returning players showed Freddy and two other freshmen a large owl nest in a eucalyptus tree near the science building. Freddy thought it would make an extraordinary backdrop for his good luck charm selfie.</p>
+
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom: 12px;">On September 14th, Freddy climbed the tree alone. He had checked — and saw no adult owl. He reached 18 feet and stood on a large branch near the nest. As he repositioned for a better camera angle, the branch snapped. Both Freddy and the branch fell. The branch struck the nest, sending it — and two owl chicks — to the ground. The chicks did not survive.</p>
+
+    <p style="line-height:1.7; font-size:0.92rem;">Freddy suffered a displaced forearm fracture and multiple bruises. He was taken by ambulance to the hospital.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-gavel"></i> The Charge: California Education Code § 32050</div>
+  <div class="card">
+    <div class="callout navy">
+      <i class="fas fa-book"></i>
+      <div>
+        <div class="callout-title">The Law in Plain English</div>
+        <p>California's hazing law says it's a crime to participate in any initiation activity — even an informal tradition — that causes or is <em>likely to cause</em> serious physical injury to a student trying to join a team or organization. The law applies even if no one explicitly ordered the student to do something dangerous.</p>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:16px"><i class="fas fa-list-check"></i> What the Prosecution Must Prove</div>
+    <p style="font-size:0.84rem; color:var(--gray-500); margin-bottom:12px;">The prosecution must prove ALL of these beyond a reasonable doubt:</p>
+    <ul class="icon-list">
+      <li><i class="fas fa-check-circle" style="color:var(--green)"></i> <strong>Hazing occurred:</strong> The "good luck charm" tradition was a form of initiation or pre-initiation into the soccer team.</li>
+      <li><i class="fas fa-check-circle" style="color:var(--green)"></i> <strong>Serious bodily injury:</strong> The tradition caused or was likely to cause serious injury (Freddy's broken arm qualifies).</li>
+      <li><i class="fas fa-check-circle" style="color:var(--green)"></i> <strong>Connected to membership:</strong> Participating was tied to being accepted on the team.</li>
+      <li><i class="fas fa-check-circle" style="color:var(--green)"></i> <strong>Consent is irrelevant:</strong> Under California law, it does NOT matter if Freddy "agreed" to participate — consent is not a defense to hazing.</li>
+    </ul>
+
+    <div class="callout red" style="margin-top:18px">
+      <i class="fas fa-exclamation-triangle"></i>
+      <div>
+        <div class="callout-title">Critical Legal Point: Consent Is NOT a Defense</div>
+        <p>California's hazing statute explicitly says that a victim choosing to participate does not let the organizers off the hook. This is a major point both sides must address. The defense cannot simply say "Freddy chose to do it."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title"><i class="fas fa-shield-halved"></i> What the Defense Will Argue</div>
+  <div class="card">
+    <ul class="icon-list">
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> The tradition was <strong>voluntary and fun</strong> — no one ever told Freddy to climb a tree or do anything dangerous.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> Freddy's choice to climb 18 feet into a tree was <strong>entirely his own idea</strong> — far beyond what any player had ever done before.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> The team captains had no knowledge that anyone would take a dangerous risk.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> The tradition itself — bringing a personal "charm" — is <strong>not inherently dangerous</strong>.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> Coach Villanueva ran an anti-hazing program; this was not a rogue, unsupervised team.</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-folder-open"></i> Evidence Exhibits — Case 1</div>
+  <div class="card" style="padding:0; overflow:hidden">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th style="width:110px">Exhibit</th>
+          <th>Description</th>
+          <th>Helpful To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit A</span></td>
+          <td>Screenshots of the team group chat showing informal communications about the "good luck charm" tradition, including photos shared by prior players of their selfie locations</td>
+          <td><span class="badge prosecution">Prosecution</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit B</span></td>
+          <td>Photograph of the eucalyptus tree and nest location taken the day after the incident</td>
+          <td><span class="badge both">Both Sides</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit D</span></td>
+          <td>University Emergency Medical Services report documenting Freddy's injuries (displaced forearm fracture, contusions)</td>
+          <td><span class="badge prosecution">Prosecution</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit E</span></td>
+          <td>University Facilities Department inspection schedule showing a tree inspection was overdue following a prior wind event</td>
+          <td><span class="badge defense">Defense</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit F</span></td>
+          <td>UEC Student Code of Conduct, including the anti-hazing policy (pages 14–17)</td>
+          <td><span class="badge both">Both Sides</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit G</span></td>
+          <td>Freddy's written statement given to campus police on the night of the incident</td>
+          <td><span class="badge both">Both Sides</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit I</span></td>
+          <td>Text messages between Freddy and a returning player in the week before the incident</td>
+          <td><span class="badge prosecution">Prosecution</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PAGE: CASE 2 — MBTA
+     ================================================================ -->
+<section class="page" id="page-case2">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Case 2: MBTA</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon" style="background:var(--purple); color:white"><i class="fas fa-feather-pointed"></i></div>
+    <h1>The People v. Freddy Suares</h1>
+    <div class="subtitle">Migratory Bird Treaty Act · 16 U.S.C. § 703 &amp; CA Fish &amp; Game Code § 86</div>
+  </div>
+
+  <div class="callout purple">
+    <i class="fas fa-star"></i>
+    <div>
+      <div class="callout-title">Why This Matters in Real Life</div>
+      <p>The Migratory Bird Treaty Act (MBTA) is one of the oldest wildlife protection laws in the United States — passed in 1918. It protects over 1,000 species of birds. But courts across the country disagree about a big question: does the law only punish people who <em>mean</em> to harm birds, or does it apply to <em>anyone</em> whose actions kill a protected bird — even accidentally? This case puts Freddy at the center of that debate.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-file-lines"></i> Freddy's Perspective</div>
+  <div class="card">
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom:12px;">Approximately two weeks before the first match, a group of returning players showed Freddy and two other freshmen a large owl nest in a eucalyptus tree near the science building. The players pointed it out with admiration and called it a campus landmark.</p>
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom:12px;">Freddy immediately thought it would make the perfect backdrop for his "good luck charm" selfie. He did not tell anyone what he was planning. He did not research the owl species. He did not contact facilities staff or wildlife authorities.</p>
+    <p style="line-height:1.7; font-size:0.92rem; margin-bottom:12px;">On September 14th, Freddy returned to the tree alone in the early evening. He watched for several minutes, saw no adult owl, and concluded the nest was empty. He began climbing, reached 18 feet, and positioned himself on a large branch. As he adjusted for a better angle, the branch snapped. Both he and the branch fell — the branch struck the nest, sending it and two owl chicks to the ground. The chicks did not survive.</p>
+    <p style="line-height:1.7; font-size:0.92rem;">A U.S. Fish and Wildlife investigation confirmed the chicks were <strong>California Spotted Owls (Strix occidentalis occidentalis)</strong>, a subspecies protected under the MBTA. Freddy never touched the nest or the birds. He had no idea this species was federally protected.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-gavel"></i> The Charges</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(124,58,237,0.1); color:var(--purple)"><i class="fas fa-feather"></i></div>
+        <div>
+          <div class="card-title">Federal: MBTA</div>
+          <div class="card-sub">16 U.S.C. § 703 — Two counts (one per chick)</div>
+        </div>
+      </div>
+      <p style="font-size:0.88rem; line-height:1.6;">It is unlawful to pursue, hunt, <strong>take</strong>, capture, kill, or possess any migratory bird, or any part, nest, or egg of such bird. The California Spotted Owl is a covered species.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(201,168,76,0.1); color:var(--gold-dark)"><i class="fas fa-fish-fins"></i></div>
+        <div>
+          <div class="card-title">State: CA Fish &amp; Game</div>
+          <div class="card-sub">California Fish and Game Code § 86</div>
+        </div>
+      </div>
+      <p style="font-size:0.88rem; line-height:1.6;">California's state law prohibits the "take" of protected wildlife species, which includes any action that results in the killing, harming, pursuing, or capturing of a protected animal.</p>
+    </div>
+  </div>
+
+  <div class="section-title"><i class="fas fa-list-check"></i> What the Prosecution Must Prove</div>
+  <div class="card">
+    <ul class="icon-list">
+      <li><i class="fas fa-check-circle" style="color:var(--green)"></i> <strong>Freddy "took" the birds:</strong> His actions led to the death of two California Spotted Owl chicks, even if he didn't touch them.</li>
+      <li><i class="fas fa-check-circle" style="color:var(--green)"></i> <strong>Protected species:</strong> The California Spotted Owl is covered by the MBTA — a fact Agent Rivera can confirm.</li>
+      <li><i class="fas fa-check-circle" style="color:var(--green)"></i> <strong>Intent (contested):</strong> For a felony, some courts require knowing intent. The prosecution may argue that Freddy's approach to a nest he knew was a "California Spotted Owl nest" satisfies this — or that strict liability applies regardless.</li>
+    </ul>
+  </div>
+
+  <div class="section-title"><i class="fas fa-shield-halved"></i> What the Defense Will Argue</div>
+  <div class="card">
+    <ul class="icon-list">
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> Freddy <strong>never intended</strong> to harm the birds — his only goal was a selfie with the nest in the background.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> He had <strong>no knowledge</strong> of the MBTA or that this owl species was federally protected.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> The branch was structurally damaged by <strong>prior storm damage</strong> — the real cause of the fall was the university's failure to inspect the tree.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> The MBTA was designed to prevent <strong>commercial and industrial</strong> bird killing, not to criminalize individual accidents.</li>
+      <li><i class="fas fa-arrow-right" style="color:var(--navy)"></i> Applying strict liability here would make criminals out of millions of people who accidentally harm wildlife during everyday activities.</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--purple);">
+    <div class="section-title" style="margin-bottom:12px"><i class="fas fa-scale-balanced" style="color:var(--purple)"></i> The Central Legal Dispute: Strict Liability vs. Knowing Intent</div>
+    <div class="grid-2" style="margin:0">
+      <div>
+        <div style="font-weight:700; color:var(--red); font-size:0.86rem; margin-bottom:8px;"><i class="fas fa-gavel"></i> Prosecution's View (Strict Liability)</div>
+        <p style="font-size:0.86rem; line-height:1.6;">The plain text of the MBTA says it's unlawful to "take" a migratory bird — period. Intent doesn't matter. If your actions caused the death, you're liable. This makes the law consistent and easy to enforce.</p>
+      </div>
+      <div>
+        <div style="font-weight:700; color:var(--navy); font-size:0.86rem; margin-bottom:8px;"><i class="fas fa-shield-halved"></i> Defense's View (Intent Required)</div>
+        <p style="font-size:0.86rem; line-height:1.6;">Federal courts are split. Several circuit courts have ruled that criminal prosecution under the MBTA requires at least some knowing or reckless conduct. Criminalizing all accidents sets a dangerous precedent.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-folder-open"></i> Evidence Exhibits — Case 2</div>
+  <div class="card" style="padding:0; overflow:hidden">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th style="width:110px">Exhibit</th>
+          <th>Description</th>
+          <th>Helpful To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit B</span></td>
+          <td>Photograph of the eucalyptus tree and nest location taken the day after the incident</td>
+          <td><span class="badge both">Both Sides</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit C</span></td>
+          <td>U.S. Fish and Wildlife Service field report confirming species identification of the two deceased chicks as California Spotted Owls</td>
+          <td><span class="badge prosecution">Prosecution</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit D</span></td>
+          <td>University EMS report documenting Freddy's injuries</td>
+          <td><span class="badge both">Both Sides</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit E</span></td>
+          <td>Facilities Department inspection schedule showing a tree inspection was overdue following a wind event three weeks earlier</td>
+          <td><span class="badge defense">Defense</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit G</span></td>
+          <td>Freddy's written statement to campus police — describes his purpose, observations, and lack of intent to disturb the nest</td>
+          <td><span class="badge defense">Defense</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit H</span></td>
+          <td>Photographs of the nest and deceased chicks taken by the responding Fish and Wildlife agent</td>
+          <td><span class="badge prosecution">Prosecution</span></td>
+        </tr>
+        <tr>
+          <td><span class="exhibit-badge">Exhibit J</span></td>
+          <td>Arborist's preliminary assessment of the eucalyptus branch condition — storm damage present, exact contribution to failure is disputed</td>
+          <td><span class="badge defense">Defense</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PAGE: WITNESSES
+     ================================================================ -->
+<section class="page" id="page-witnesses">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Witness Roster</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon"><i class="fas fa-user-group"></i></div>
+    <h1>Witness Roster</h1>
+    <div class="subtitle">12 witnesses across both cases — learn who they are and what to expect</div>
+  </div>
+
+  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px;">
+    <button class="btn btn-filter active" onclick="filterWitnesses('all', this)"><i class="fas fa-users"></i> All Witnesses</button>
+    <button class="btn btn-filter" onclick="filterWitnesses('prosecution', this)"><i class="fas fa-hammer"></i> Prosecution</button>
+    <button class="btn btn-filter" onclick="filterWitnesses('defense', this)"><i class="fas fa-shield"></i> Defense</button>
+    <button class="btn btn-filter" onclick="filterWitnesses('case1', this)"><i class="fas fa-users-gear"></i> Case 1 Only</button>
+    <button class="btn btn-filter" onclick="filterWitnesses('case2', this)"><i class="fas fa-feather"></i> Case 2 Only</button>
+  </div>
+
+  <div class="witness-grid" id="witnessGrid">
+
+    <!-- Freddy Suares (Case 1, Prosecution) -->
+    <div class="witness-card" data-side="prosecution" data-case="case1 case2">
+      <div class="witness-card-top">
+        <div class="witness-avatar"><i class="fas fa-person"></i></div>
+        <div class="witness-name">Freddy Suares</div>
+        <div class="witness-role">Alleged Victim / Freshman Player / Defendant</div>
+        <div class="witness-badges">
+          <span class="badge prosecution">Prosecution (Case 1)</span>
+          <span class="badge defense">Defense (Case 2)</span>
+          <span class="badge case1">Case 1</span>
+          <span class="badge case2">Case 2</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">In Case 1, Freddy testifies about the informal pressure he felt to bring an impressive good luck charm selfie — what returning players said, examples shared in the group chat, and his belief that not participating would hurt his playing time and social standing. In Case 2, he testifies that he only intended to take a photo with the nest in the background and had no idea it was a protected species' nest.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Defense (Case 1): Was Freddy ever directly told to do anything dangerous? Did he act entirely on his own? Prosecution (Case 2): He said he "checked" for owls — but didn't consult any authority. Jordan Kim will say the players told him it was a "California Spotted Owl nest."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diego Mendes -->
+    <div class="witness-card" data-side="prosecution" data-case="case1">
+      <div class="witness-card-top">
+        <div class="witness-avatar"><i class="fas fa-person"></i></div>
+        <div class="witness-name">Diego Mendes</div>
+        <div class="witness-role">Freshman Teammate</div>
+        <div class="witness-badges">
+          <span class="badge prosecution">Prosecution</span>
+          <span class="badge case1">Case 1</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Diego corroborates Freddy's account — returning players described the tradition and the group chat made it clear that "ordinary" charms were mocked, while unusual or risky ones were celebrated. He also felt pressure to participate.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Defense will question whether Diego actually felt coerced or whether his testimony is colored by sympathy for his injured teammate. They'll ask what HE brought as a charm — and whether his own experience shows the tradition was harmless.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Professor Linda Ortega -->
+    <div class="witness-card" data-side="prosecution" data-case="case1">
+      <div class="witness-card-top">
+        <div class="witness-avatar"><i class="fas fa-person-chalkboard"></i></div>
+        <div class="witness-name">Prof. Linda Ortega</div>
+        <div class="witness-role">Expert in College Athletic Hazing Culture</div>
+        <div class="witness-badges">
+          <span class="badge prosecution">Prosecution</span>
+          <span class="badge case1">Case 1</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Professor Ortega explains that <em>implicit traditions</em> — those never formally stated but widely understood — are among the most coercive forms of hazing because they give organizers plausible deniability while maximizing pressure on newcomers. Social science literature supports this finding.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Defense will challenge whether her academic definition of hazing matches California's legal definition, and whether her generalized research applies to this specific situation on this specific team.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marco Delgado -->
+    <div class="witness-card" data-side="defense" data-case="case1">
+      <div class="witness-card-top defense-top">
+        <div class="witness-avatar"><i class="fas fa-person"></i></div>
+        <div class="witness-name">Marco Delgado</div>
+        <div class="witness-role">Team Captain</div>
+        <div class="witness-badges">
+          <span class="badge defense">Defense</span>
+          <span class="badge case1">Case 1</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Marco will testify the good luck charm tradition is a fun, voluntary celebration of team spirit. His own charm three years ago was a photo in his high school jersey — sentimental and harmless. No one ever instructed players to do anything dangerous.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Prosecution will show Marco specific messages in <strong>Exhibit A</strong> (the group chat) that celebrated risky selfie locations. Did Marco see those messages? What did he do — if anything — when he saw them?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sofia Reyes -->
+    <div class="witness-card" data-side="defense" data-case="case1">
+      <div class="witness-card-top defense-top">
+        <div class="witness-avatar"><i class="fas fa-person"></i></div>
+        <div class="witness-name">Sofia Reyes</div>
+        <div class="witness-role">Assistant Team Captain</div>
+        <div class="witness-badges">
+          <span class="badge defense">Defense</span>
+          <span class="badge case1">Case 1</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Sofia says the tradition has never caused injury before and she believed all players understood it was optional. Freddy's decision to climb a tree was entirely his own creative interpretation — far beyond anything the tradition called for.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Prosecution asks: did Sofia <em>ever</em> explicitly tell new players the tradition was optional? What consequences did she observe for players who brought "boring" charms? Why did the group chat celebrate risky locations?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coach Villanueva -->
+    <div class="witness-card" data-side="defense" data-case="case1">
+      <div class="witness-card-top defense-top">
+        <div class="witness-avatar"><i class="fas fa-whistle"></i></div>
+        <div class="witness-name">Coach Renata Villanueva</div>
+        <div class="witness-role">Head Soccer Coach, UEC</div>
+        <div class="witness-badges">
+          <span class="badge defense">Defense</span>
+          <span class="badge case1">Case 1</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Coach Villanueva testifies she had no knowledge of any dangerous elements of the tradition, believed it was harmless team morale, and describes her anti-hazing training and positive team culture initiatives.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Does a coach bear responsibility for traditions that develop on their team even without direct knowledge? Was the anti-hazing training she received adequate? Should she have known?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent Rivera -->
+    <div class="witness-card" data-side="prosecution" data-case="case2">
+      <div class="witness-card-top">
+        <div class="witness-avatar"><i class="fas fa-shield-badge"></i></div>
+        <div class="witness-name">Special Agent Carlos Rivera</div>
+        <div class="witness-role">U.S. Fish and Wildlife Service</div>
+        <div class="witness-badges">
+          <span class="badge prosecution">Prosecution</span>
+          <span class="badge case2">Case 2</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Agent Rivera confirms the scene investigation, species identification, and deaths of two California Spotted Owl chicks. He explains the MBTA's protections and argues that Freddy's knowing approach to a protected nest constitutes reckless disregard for wildlife law.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Has his agency ever prosecuted an individual for an <em>accidental</em> wildlife death caused by recreational activity? What guidance exists for ordinary citizens? Was the MBTA meant to criminalize individual accidents?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dr. Osei -->
+    <div class="witness-card" data-side="prosecution" data-case="case2">
+      <div class="witness-card-top">
+        <div class="witness-avatar"><i class="fas fa-microscope"></i></div>
+        <div class="witness-name">Dr. Amara Osei</div>
+        <div class="witness-role">Wildlife Biologist, CA Dept. of Fish &amp; Wildlife</div>
+        <div class="witness-badges">
+          <span class="badge prosecution">Prosecution</span>
+          <span class="badge case2">Case 2</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Dr. Osei testifies that California Spotted Owls are visually identifiable by a layperson due to their distinctive spotted plumage, and that owl nests in eucalyptus trees are publicly well-known. Any reasonable person approaching a large owl nest should have sought guidance before climbing.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Are chick contents visible from the ground? Can a layperson reliably distinguish a California Spotted Owl from other species without training? Is the absence of the adult owl a reasonable sign the nest is inactive?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jordan Kim -->
+    <div class="witness-card" data-side="prosecution" data-case="case2">
+      <div class="witness-card-top">
+        <div class="witness-avatar"><i class="fas fa-person"></i></div>
+        <div class="witness-name">Jordan Kim</div>
+        <div class="witness-role">Returning Player Who Showed Freddy the Nest</div>
+        <div class="witness-badges">
+          <span class="badge prosecution">Prosecution</span>
+          <span class="badge case2">Case 2</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Jordan testifies that when they showed Freddy the nest, they told him it was "a California Spotted Owl nest" and that it was "pretty special." This directly challenges the defense's claim that Freddy had no knowledge of the species or its protected status.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Were those exact words used — or is Jordan reconstructing the conversation after the fact? Did Jordan himself know the legal implications of the MBTA at the time? Did he warn Freddy not to approach the nest?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prof. Holloway -->
+    <div class="witness-card" data-side="defense" data-case="case2">
+      <div class="witness-card-top defense-top">
+        <div class="witness-avatar"><i class="fas fa-person-chalkboard"></i></div>
+        <div class="witness-name">Prof. Diane Holloway</div>
+        <div class="witness-role">Environmental Law Professor, UC San Diego</div>
+        <div class="witness-badges">
+          <span class="badge defense">Defense</span>
+          <span class="badge case2">Case 2</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Professor Holloway testifies that the MBTA was designed to prevent commercial and industrial activity that systematically kills birds — not to criminalize accidental deaths by individuals. She cites federal circuit court decisions rejecting strict liability for individual actors.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Prosecution will cite circuit courts that ruled FOR broader liability. Would her interpretation effectively immunize <em>any</em> accidental wildlife killing? What is the plain text of the statute?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marcus Webb -->
+    <div class="witness-card" data-side="defense" data-case="case2">
+      <div class="witness-card-top defense-top">
+        <div class="witness-avatar"><i class="fas fa-tree"></i></div>
+        <div class="witness-name">Marcus Webb</div>
+        <div class="witness-role">Certified Arborist</div>
+        <div class="witness-badges">
+          <span class="badge defense">Defense</span>
+          <span class="badge case2">Case 2</span>
+        </div>
+      </div>
+      <div class="witness-body">
+        <div class="witness-section-title"><i class="fas fa-microphone"></i> Direct Testimony</div>
+        <div class="witness-text">Marcus examined the fallen branch and found signs of internal decay consistent with prior storm damage. He argues the branch would have failed under any adult-sized person's weight, and that the university's failure to inspect the tree was more significant than Freddy's climbing.</div>
+        <div class="vuln-box">
+          <div class="witness-section-title"><i class="fas fa-crosshairs"></i> Cross-Examination Watch Out</div>
+          <div class="witness-text" style="margin:0">Even if the branch was weakened, Freddy's decision to climb was the <strong>proximate cause</strong> of the nest's disturbance. Did Freddy's weight accelerate the failure? Should he have tested the branch's stability before trusting it with his full weight?</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end witnessGrid -->
+</section>
+
+
+<!-- ================================================================
+     PAGE: HOW A TRIAL WORKS
+     ================================================================ -->
+<section class="page" id="page-howtrial">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">How a Trial Works</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon"><i class="fas fa-gavel"></i></div>
+    <h1>How a Trial Works</h1>
+    <div class="subtitle">From the first arrest to the final verdict — step by step</div>
+  </div>
+
+  <div class="callout gold">
+    <i class="fas fa-lightbulb"></i>
+    <div>
+      <div class="callout-title">The Big Picture</div>
+      <p>A criminal trial is the government's attempt to prove — beyond a reasonable doubt — that a specific person committed a specific crime. The defendant is presumed innocent until proven guilty. It's the prosecution's job to overcome that presumption; it is never the defendant's job to prove their innocence.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-timeline"></i> The Trial Timeline</div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Before Trial</div>
+        <div class="timeline-title">Arrest, Arraignment &amp; Plea</div>
+        <div class="timeline-body">The defendant is formally charged and appears in court. They enter a plea — <strong>Guilty</strong>, <strong>Not Guilty</strong>, or <strong>No Contest</strong>. If they plead not guilty, the case moves toward trial. Attorneys exchange evidence through a process called <em>discovery</em>.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Step 1</div>
+        <div class="timeline-title">Jury Selection (Voir Dire)</div>
+        <div class="timeline-body">Attorneys and the judge question potential jurors to find 12 (or fewer) people who can be fair and impartial. Each side can remove jurors they feel are biased through <em>challenges</em>. <strong>Voir dire</strong> is French for "to speak the truth" — jurors take an oath to answer honestly.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Step 2</div>
+        <div class="timeline-title">Opening Statements</div>
+        <div class="timeline-body">Both attorneys give an overview of the case. The prosecution goes first. Opening statements are <em>not evidence</em> — they're a roadmap. Attorneys tell the jury what they expect the evidence will show. This is the first impression that matters!</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Step 3</div>
+        <div class="timeline-title">Prosecution's Case</div>
+        <div class="timeline-body">The prosecution presents its witnesses and evidence. For each witness: the prosecution does <strong>direct examination</strong> (asking their own witness questions), then the defense can do <strong>cross-examination</strong> (challenging the witness). Evidence like photos or documents must be formally introduced through a witness who can authenticate them.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Step 4</div>
+        <div class="timeline-title">Defense's Case</div>
+        <div class="timeline-body">The defense presents its witnesses and evidence. The defendant has the right to testify but is <em>not required to</em> — and the jury cannot hold silence against them. The prosecution can cross-examine defense witnesses. The defense may also call the same witnesses back to clarify their testimony.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Step 5</div>
+        <div class="timeline-title">Closing Arguments</div>
+        <div class="timeline-body">Both attorneys summarize the evidence and argue why the jury should find in their favor. The prosecution goes first, then the defense, then the prosecution gets a final rebuttal. Closing arguments are the most persuasive moment of the trial — this is where great attorneys shine.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Step 6</div>
+        <div class="timeline-title">Jury Instructions</div>
+        <div class="timeline-body">The judge reads the jury specific legal instructions explaining exactly what they must find — and what standard they must use — to convict or acquit. In criminal cases, the standard is <strong>beyond a reasonable doubt</strong> — the highest standard in American law.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"><i class="fas fa-circle"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-step">Step 7</div>
+        <div class="timeline-title">Deliberation &amp; Verdict</div>
+        <div class="timeline-body">The jury leaves the courtroom to deliberate privately. They review the evidence, discuss each charge, and must reach a unanimous verdict (all 12 must agree). They return a verdict of <strong>Guilty</strong> or <strong>Not Guilty</strong> for each charge. <em>Not Guilty</em> means the prosecution failed to meet its burden — not necessarily that the defendant is innocent.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-comments"></i> How Evidence &amp; Objections Work</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon"><i class="fas fa-folder-open"></i></div>
+        <div><div class="card-title">Introducing Evidence</div></div>
+      </div>
+      <ul class="icon-list">
+        <li><i class="fas fa-1"></i> Attorney asks the judge to mark the item (e.g., "Your Honor, I'd like to mark this as Exhibit A")</li>
+        <li><i class="fas fa-2"></i> Attorney shows it to opposing counsel</li>
+        <li><i class="fas fa-3"></i> Attorney lays "foundation" through the witness — asking questions that show the item is authentic and relevant</li>
+        <li><i class="fas fa-4"></i> Attorney moves to admit the exhibit: "Your Honor, I move to admit Exhibit A into evidence"</li>
+        <li><i class="fas fa-5"></i> Judge admits it — now the jury can consider it</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon"><i class="fas fa-hand-paper"></i></div>
+        <div><div class="card-title">Making Objections</div></div>
+      </div>
+      <ul class="icon-list">
+        <li><i class="fas fa-arrow-right"></i> Stand up and say <strong>"Objection, Your Honor"</strong> followed by a brief reason</li>
+        <li><i class="fas fa-arrow-right"></i> The judge rules: <strong>"Sustained"</strong> (objection granted — question is blocked) or <strong>"Overruled"</strong> (objection denied — witness must answer)</li>
+        <li><i class="fas fa-arrow-right"></i> Common grounds: <em>Relevance, Hearsay, Leading, Foundation, Speculation, Calls for a legal conclusion</em></li>
+        <li><i class="fas fa-arrow-right"></i> Objections must be timely — raise them before the witness answers!</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-map-pin"></i> Courtroom Seating Diagram</div>
+  <div class="courtroom">
+    <p style="font-size:0.8rem; color:var(--gray-500); margin-bottom:16px; text-align:center;">Looking from the entrance toward the judge — simplified layout</p>
+    <div class="courtroom-grid">
+      <div class="court-seat court-full gold-seat">
+        <i class="fas fa-gavel"></i>
+        <div class="label">Judge</div>
+        <div class="role-desc">Bench (elevated, center front)</div>
+      </div>
+
+      <div class="court-seat navy-seat">
+        <i class="fas fa-person"></i>
+        <div class="label">Witness Stand</div>
+        <div class="role-desc">To the judge's right</div>
+      </div>
+      <div class="court-seat gray-seat">
+        <i class="fas fa-clipboard"></i>
+        <div class="label">Court Reporter</div>
+        <div class="role-desc">Below &amp; near the judge</div>
+      </div>
+      <div class="court-seat gray-seat">
+        <i class="fas fa-person-dress"></i>
+        <div class="label">Clerk</div>
+        <div class="role-desc">Near the judge</div>
+      </div>
+
+      <div class="court-seat navy-seat">
+        <i class="fas fa-hammer"></i>
+        <div class="label">Prosecution Table</div>
+        <div class="role-desc">Closer to jury box</div>
+      </div>
+      <div class="court-seat gray-seat">
+        <i class="fas fa-person-dots-from-line"></i>
+        <div class="label">Jury Box</div>
+        <div class="role-desc">12 jurors, side of courtroom</div>
+      </div>
+      <div class="court-seat navy-seat">
+        <i class="fas fa-shield-halved"></i>
+        <div class="label">Defense Table</div>
+        <div class="role-desc">Defendant sits here too</div>
+      </div>
+
+      <div class="court-seat court-full gray-seat">
+        <i class="fas fa-users"></i>
+        <div class="label">Gallery (Public Seating)</div>
+        <div class="role-desc">Observers, press, family — behind the bar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PAGE: ROLES & RESPONSIBILITIES
+     ================================================================ -->
+<section class="page" id="page-roles">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Roles &amp; Responsibilities</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon"><i class="fas fa-id-badge"></i></div>
+    <h1>Roles &amp; Responsibilities</h1>
+    <div class="subtitle">Everyone in the courtroom has a specific job — know yours inside and out</div>
+  </div>
+
+  <!-- JUDGE -->
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-icon"><i class="fas fa-gavel"></i></div>
+      <div>
+        <h3>Judge</h3>
+        <div class="role-tagline">The neutral ruler of the courtroom — your word is law</div>
+      </div>
+    </div>
+    <div class="role-body">
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-list-check"></i> What You Do</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-gavel"></i> Run the courtroom and maintain order</li>
+          <li><i class="fas fa-gavel"></i> Rule on all objections (Sustained or Overruled)</li>
+          <li><i class="fas fa-gavel"></i> Read jury instructions before deliberation</li>
+          <li><i class="fas fa-gavel"></i> Decide on procedural issues (can a witness be recalled? Can an exhibit be shown?)</li>
+        </ul>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-shirt"></i> What You Wear</div>
+        <p style="font-size:0.88rem">A black robe if available. Otherwise, professional attire in dark colors. You sit elevated above all other participants.</p>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-comment"></i> Sample Language</div>
+        <div class="sample-phrase">Objection sustained — the question calls for hearsay. Counselor, please rephrase.</div>
+        <div class="sample-phrase">Order. We will proceed. Counselor for the defense, you may call your next witness.</div>
+      </div>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h5><i class="fas fa-check"></i> DO</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Stay completely neutral — never signal which side you favor</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Speak clearly and with authority</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Ask attorneys to clarify if an objection is unclear</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h5><i class="fas fa-times"></i> DON'T</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Show frustration or favor to either side</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Interrupt unnecessarily — let attorneys complete their questions</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Help attorneys with their arguments</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROSECUTING ATTORNEY -->
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-icon"><i class="fas fa-hammer"></i></div>
+      <div>
+        <h3>Prosecuting Attorney</h3>
+        <div class="role-tagline">You represent the People — prove the case beyond a reasonable doubt</div>
+      </div>
+    </div>
+    <div class="role-body">
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-list-check"></i> What You Do</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-gavel"></i> Deliver an opening statement laying out the evidence you'll present</li>
+          <li><i class="fas fa-gavel"></i> Question your witnesses (direct examination)</li>
+          <li><i class="fas fa-gavel"></i> Cross-examine defense witnesses to challenge their credibility</li>
+          <li><i class="fas fa-gavel"></i> Introduce exhibits into evidence</li>
+          <li><i class="fas fa-gavel"></i> Deliver a closing argument — and get a final rebuttal</li>
+        </ul>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-comment"></i> Sample Language</div>
+        <div class="sample-phrase">Your Honor, I'd like to move to admit Prosecution Exhibit A into evidence.</div>
+        <div class="sample-phrase">Objection, Your Honor — the question is leading.</div>
+        <div class="sample-phrase">No further questions, Your Honor.</div>
+      </div>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h5><i class="fas fa-check"></i> DO</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Know every element of each charge cold</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Use leading questions on cross-examination (allowed!)</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Tie all evidence back to the specific legal elements</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h5><i class="fas fa-times"></i> DON'T</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Use leading questions on direct examination</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> State personal opinions ("I believe the defendant...")</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Ask questions you don't know the answer to on cross</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEFENSE ATTORNEY -->
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-icon"><i class="fas fa-shield-halved"></i></div>
+      <div>
+        <h3>Defense Attorney</h3>
+        <div class="role-tagline">Your job is to create reasonable doubt — you don't have to prove innocence</div>
+      </div>
+    </div>
+    <div class="role-body">
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-list-check"></i> What You Do</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-gavel"></i> Cross-examine prosecution witnesses to find inconsistencies and weaknesses</li>
+          <li><i class="fas fa-gavel"></i> Call and examine your own witnesses</li>
+          <li><i class="fas fa-gavel"></i> Object to improper questions and evidence</li>
+          <li><i class="fas fa-gavel"></i> Deliver a powerful closing argument focused on reasonable doubt</li>
+        </ul>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-comment"></i> Sample Language</div>
+        <div class="sample-phrase">Objection, Your Honor — assumes facts not in evidence.</div>
+        <div class="sample-phrase">Your Honor, the defense moves to admit Defense Exhibit J, the arborist's report.</div>
+        <div class="sample-phrase">Ladies and gentlemen of the jury, the prosecution has not proven its case beyond a reasonable doubt.</div>
+      </div>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h5><i class="fas fa-check"></i> DO</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Focus on what the prosecution FAILED to prove</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Use short, pointed questions on cross-examination</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Remind the jury of the presumption of innocence</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h5><i class="fas fa-times"></i> DON'T</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Argue with the judge after a ruling</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Let prosecution witnesses ramble — cut off non-responsive answers</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Promise evidence in opening that you can't deliver</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WITNESS -->
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-icon"><i class="fas fa-user-tie"></i></div>
+      <div>
+        <h3>Witness</h3>
+        <div class="role-tagline">Tell your story truthfully and stay consistent under pressure</div>
+      </div>
+    </div>
+    <div class="role-body">
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-list-check"></i> What You Do</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-gavel"></i> Take an oath to tell the truth before testifying</li>
+          <li><i class="fas fa-gavel"></i> Answer questions from your attorney (direct examination) with full, clear answers</li>
+          <li><i class="fas fa-gavel"></i> Answer questions from the opposing attorney (cross-examination) honestly but carefully</li>
+          <li><i class="fas fa-gavel"></i> Stay in character and only know what your character would know</li>
+        </ul>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-comment"></i> Sample Language</div>
+        <div class="sample-phrase">To the best of my knowledge, yes — I saw that message in the group chat.</div>
+        <div class="sample-phrase">I'm not sure I understand the question. Could you please rephrase?</div>
+        <div class="sample-phrase">I don't recall the exact words, but my understanding was...</div>
+      </div>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h5><i class="fas fa-check"></i> DO</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Listen to every question carefully before answering</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Say "I don't know" or "I don't remember" if that's true</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Stay calm — don't let cross-examination rattle you</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h5><i class="fas fa-times"></i> DON'T</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Answer a question before your attorney can object</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Volunteer information you weren't asked</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Argue with the cross-examining attorney</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JUROR -->
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-icon"><i class="fas fa-scale-balanced"></i></div>
+      <div>
+        <h3>Jury Member</h3>
+        <div class="role-tagline">The most important role in the room — you decide the verdict</div>
+      </div>
+    </div>
+    <div class="role-body">
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-list-check"></i> What You Do</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-gavel"></i> Listen to all testimony and evidence with an open mind</li>
+          <li><i class="fas fa-gavel"></i> Take notes (if permitted) on key evidence and credibility of witnesses</li>
+          <li><i class="fas fa-gavel"></i> Do NOT discuss the case with anyone during the trial</li>
+          <li><i class="fas fa-gavel"></i> Deliberate with fellow jurors after all evidence is in</li>
+          <li><i class="fas fa-gavel"></i> Reach a unanimous verdict on each charge</li>
+        </ul>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-brain"></i> During Deliberation</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-arrow-right"></i> Apply the jury instructions from the judge — what does the law actually require?</li>
+          <li><i class="fas fa-arrow-right"></i> Ask: did the prosecution prove EVERY element of the crime beyond a reasonable doubt?</li>
+          <li><i class="fas fa-arrow-right"></i> Evaluate witness credibility — who was consistent? Who had reasons to lie?</li>
+          <li><i class="fas fa-arrow-right"></i> "Reasonable doubt" means honest, substantial doubt based on evidence — not just any possibility</li>
+        </ul>
+      </div>
+      <div class="dos-donts">
+        <div class="do-box">
+          <h5><i class="fas fa-check"></i> DO</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Keep an open mind throughout — don't decide early</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Ask to have jury instructions re-read if confused</li>
+            <li><i class="fas fa-check" style="color:var(--green)"></i> Base your verdict ONLY on evidence presented in court</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h5><i class="fas fa-times"></i> DON'T</h5>
+          <ul class="icon-list">
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Let your personal feelings about the defendant affect you</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Consider anything outside of the evidence presented</li>
+            <li><i class="fas fa-times" style="color:var(--red)"></i> Cave to peer pressure — stand by your honest assessment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BAILIFF -->
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-icon"><i class="fas fa-star-and-crescent"></i></div>
+      <div>
+        <h3>Bailiff</h3>
+        <div class="role-tagline">Maintain order and assist the judge and jury</div>
+      </div>
+    </div>
+    <div class="role-body">
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-list-check"></i> What You Do</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-gavel"></i> Call the court to order: "All rise! The Honorable [Name] presiding."</li>
+          <li><i class="fas fa-gavel"></i> Administer the oath to witnesses: "Do you swear to tell the truth, the whole truth, and nothing but the truth?"</li>
+          <li><i class="fas fa-gavel"></i> Escort the jury in and out of the courtroom</li>
+          <li><i class="fas fa-gavel"></i> Maintain order in the gallery</li>
+        </ul>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-comment"></i> Sample Language</div>
+        <div class="sample-phrase">All rise! The Superior Court of El Cajon County is now in session, the Honorable [Name] presiding. Please be seated.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COURT REPORTER -->
+  <div class="role-card">
+    <div class="role-card-header">
+      <div class="role-icon"><i class="fas fa-keyboard"></i></div>
+      <div>
+        <h3>Court Reporter</h3>
+        <div class="role-tagline">Record every word — the official record of the trial</div>
+      </div>
+    </div>
+    <div class="role-body">
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-list-check"></i> What You Do</div>
+        <ul class="icon-list">
+          <li><i class="fas fa-gavel"></i> Record everything said during the trial — every question, answer, objection, and ruling</li>
+          <li><i class="fas fa-gavel"></i> Ask speakers to slow down or repeat if needed</li>
+          <li><i class="fas fa-gavel"></i> Keep the official transcript of the proceeding</li>
+        </ul>
+      </div>
+      <div class="role-section">
+        <div class="role-section-header"><i class="fas fa-comment"></i> Sample Language</div>
+        <div class="sample-phrase">Your Honor, could counsel please speak up? I couldn't hear the witness's last response.</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ================================================================
+     PAGE: GLOSSARY
+     ================================================================ -->
+<section class="page" id="page-glossary">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Legal Glossary</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon"><i class="fas fa-book-open"></i></div>
+    <h1>Legal Glossary</h1>
+    <div class="subtitle">30+ terms — click any term to expand its definition, or search below</div>
+  </div>
+
+  <div class="search-wrap">
+    <i class="fas fa-search"></i>
+    <input type="text" class="search-input" id="glossarySearch" placeholder="Search terms... (e.g. 'hearsay' or 'burden')" oninput="filterGlossary(this.value)">
+  </div>
+
+  <div id="glossaryCount" style="font-size:0.82rem; color:var(--gray-500); margin-bottom:14px;"></div>
+
+  <div class="glossary-list" id="glossaryList">
+
+    <div class="gloss-item" data-term="actus reus">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-scale-balanced"></i> Actus Reus</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def"><span class="latin">Actus reus</span> is Latin for "guilty act." It refers to the physical action — or sometimes inaction — that makes up part of a crime. In our case, the actus reus for the hazing charge is the tradition itself; for the MBTA charge, it's Freddy climbing the tree and causing the nest to fall.<div class="example">The prosecution must prove both that Freddy did something (actus reus) AND that he had the right mental state (mens rea) — in most crimes, both are required.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="mens rea">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-brain"></i> Mens Rea</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def"><span class="latin">Mens rea</span> is Latin for "guilty mind." It refers to the intent or mental state required to commit a crime. Different crimes require different levels: <em>purposeful, knowing, reckless,</em> or <em>negligent.</em><div class="example">The big debate in Case 2 is whether the MBTA requires mens rea at all — or whether it imposes strict liability regardless of Freddy's intent.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="beyond a reasonable doubt">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-balance-scale"></i> Beyond a Reasonable Doubt</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">This is the highest standard of proof in American law — used in ALL criminal cases. It means the jury must be firmly convinced of the defendant's guilt. It is NOT "beyond any possible doubt," but it IS much more than "probably guilty." If a juror has honest, substantial doubt based on the evidence, they must vote Not Guilty.<div class="example">If a juror thinks "Freddy probably did it, but I'm not really sure," that's reasonable doubt — they should vote Not Guilty.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="strict liability">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-lock"></i> Strict Liability</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A legal standard where someone is responsible for harm regardless of their intent or mental state. You don't have to mean to do something wrong — just doing it is enough. Strict liability is rare in criminal law but is argued here under the MBTA.<div class="example">Speed limits are strict liability: it doesn't matter if you were distracted or didn't notice the sign — if you were going 45 in a 35 zone, you're liable.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="objection">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-hand-paper"></i> Objection</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A formal protest made by an attorney during trial, asking the judge to disallow a question, answer, or piece of evidence because it violates the rules of evidence. Attorneys must state the legal ground for their objection (e.g., "objection, hearsay").<div class="example">If a prosecutor asks a witness "What did your friend tell you the defendant said?" — the defense would object on grounds of hearsay.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="sustained">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-check-circle"></i> Sustained</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The judge's ruling that agrees with an objection. When an objection is sustained, the question is blocked — the witness may not answer it, and the jury is told to disregard it if it was already partially answered.<div class="example">"Objection, leading!" / "Sustained. Counselor, please rephrase the question."</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="overruled">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-times-circle"></i> Overruled</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The judge's ruling that rejects an objection. The question stands and the witness must answer it.<div class="example">"Objection, relevance!" / "Overruled. The witness may answer."</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="leading question">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-arrow-right"></i> Leading Question</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A question that suggests the desired answer within the question itself. Leading questions are NOT allowed during direct examination (questioning your own witness) but ARE allowed during cross-examination.<div class="example">Leading: "You were at the tree that night, weren't you?" / Non-leading: "Where were you on the night of September 14th?"</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="hearsay">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-ear-listen"></i> Hearsay</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">An out-of-court statement offered in court to prove the truth of what it says. Hearsay is generally not allowed because the person who actually made the statement isn't there to be cross-examined. There are many exceptions.<div class="example">"My friend told me Freddy said he was going to climb the tree" — this is hearsay if offered to prove Freddy actually said it.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="foundation">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-layer-group"></i> Foundation</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The preliminary information an attorney must establish before a piece of evidence can be admitted or before an expert can testify. Foundation proves that the evidence is what it claims to be and that the witness has personal knowledge of it.<div class="example">Before showing the jury the group chat screenshots (Exhibit A), the attorney must ask a witness to confirm they recognize the messages and that they are authentic.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="relevance relevant">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-link"></i> Relevance</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">Evidence is relevant if it has a tendency to make a fact in the case more or less likely to be true. Only relevant evidence is admissible. "Objection, relevance" means the attorney believes the evidence or question has nothing to do with the case.<div class="example">Freddy's GPA is probably irrelevant to whether he "took" a protected bird. His knowledge of the species of owl is very relevant.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="proximate cause">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-link"></i> Proximate Cause</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The primary cause that, in a direct and unbroken sequence, led to the harm. To be convicted of a crime, the defendant's actions must be the proximate cause of the harm — not just a distant contributing factor.<div class="example">Was it Freddy climbing the tree, or the university's failure to inspect the damaged branch, that was the proximate cause of the nest falling?</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="superseding cause">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-bolt"></i> Superseding Cause</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A new, independent event that breaks the chain of causation between the defendant's conduct and the harm — potentially reducing or eliminating liability. The defense in Case 2 argues the university's failure to inspect the storm-damaged tree is a superseding cause.<div class="example">If a storm had struck the tree at the same moment Freddy was climbing and caused the branch to fall — that might be a superseding cause.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="hazing">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-users"></i> Hazing</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">Under California Education Code § 32050, hazing means any method of initiation or pre-initiation into a student organization that causes, or is likely to cause, serious bodily injury. Importantly, the victim's consent is NOT a defense. Hazing does not have to be explicit — implicit pressure counts.<div class="example">A tradition that pressures new players to take risky selfies — even without a written rule — may qualify as hazing.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="take mbta migratory bird">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-feather"></i> "Take" (MBTA Definition)</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">Under the Migratory Bird Treaty Act, "take" means to pursue, hunt, shoot, wound, kill, trap, capture, or collect any migratory bird — or to attempt to do so. Courts have debated whether indirect actions that result in bird deaths also count as a "take."<div class="example">Freddy never touched the birds — but his actions dislodged their nest and caused their deaths. Does that count as a "take"? That's the central question in Case 2.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="migratory bird">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-dove"></i> Migratory Bird</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A bird species protected under the Migratory Bird Treaty Act (1918). The Act covers over 1,000 species, including the California Spotted Owl. The law protects not just the birds, but also their nests, eggs, and parts.<div class="example">The California Spotted Owl (Strix occidentalis occidentalis) is a covered migratory bird species, confirmed by Agent Rivera's field report (Exhibit C).</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="cross examination cross-examination">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-arrows-cross"></i> Cross-Examination</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">Questioning of a witness by the opposing attorney — the side that did NOT call that witness. Leading questions ARE allowed on cross-examination. The purpose is to challenge credibility, reveal inconsistencies, or elicit facts favorable to your side.<div class="example">After the prosecution questions Agent Rivera directly, the defense attorney cross-examines him — challenging whether the MBTA has ever been used to prosecute individual accidents.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="direct examination">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-arrow-up"></i> Direct Examination</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">Questioning of a witness by the attorney who called that witness. Leading questions are NOT allowed on direct examination. The goal is to tell your client's story through the witness in a clear, compelling way.<div class="example">The prosecution conducts direct examination of Diego Mendes, asking him to describe — in his own words — the pressure he felt around the good luck charm tradition.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="voir dire jury selection">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-users"></i> Voir Dire</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The process of selecting a jury, where attorneys and the judge question potential jurors to identify and remove those who cannot be impartial. <span class="latin">Voir dire</span> is French for "to speak the truth." Each attorney can remove potential jurors using "for-cause" challenges (unlimited) or "peremptory" challenges (limited, no reason required).<div class="example">An attorney might remove a juror during voir dire who says they already have a strong opinion about hazing cases.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="arraignment">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-file-contract"></i> Arraignment</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The first formal court appearance after charges are filed. The defendant is read the charges against them and enters a plea (Guilty, Not Guilty, or No Contest). Bail is also often decided at this stage.<div class="example">Freddy's arraignment would have been where he was formally told he is charged with two counts of violating the MBTA and one count under CA Fish &amp; Game Code § 86.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="indictment">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-scroll"></i> Indictment</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A formal accusation issued by a grand jury that there is enough evidence to charge someone with a serious crime. Not all cases require a grand jury indictment — prosecutors can sometimes file charges directly. An indictment is not a finding of guilt; it just means the case moves forward.<div class="example">A grand jury might issue an indictment of Marco Delgado based on evidence in the group chat without him being present to defend himself.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="plea">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-comment-dots"></i> Plea</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The defendant's formal response to the charges: <strong>Guilty</strong> (admitting the crime), <strong>Not Guilty</strong> (denying guilt and demanding the prosecution prove its case), or <strong>No Contest</strong> (not admitting guilt but accepting the punishment — common in cases with related civil lawsuits).<div class="example">Freddy enters a plea of Not Guilty — meaning this case goes to trial, and the prosecution must prove its case.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="burden of proof">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-weight-hanging"></i> Burden of Proof</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The obligation to prove the facts of your case. In criminal trials, the burden always rests with the prosecution — they must prove guilt. The defense has no burden to prove innocence. This directly reflects the presumption of innocence.<div class="example">"The prosecution has the burden to prove, beyond a reasonable doubt, that Freddy Suares took a protected migratory bird."</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="presumption of innocence">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-person-circle-check"></i> Presumption of Innocence</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The foundational rule of American criminal law: every defendant is presumed innocent until proven guilty beyond a reasonable doubt. The jury must begin deliberation assuming the defendant did NOT commit the crime — it's the prosecution's job to overcome that presumption.<div class="example">Even if a juror thinks Freddy "probably did something wrong," that isn't enough. Presumption of innocence means they should vote Not Guilty unless the prosecution has proven every element.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="closing argument">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-microphone"></i> Closing Argument</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The final statement each attorney makes to the jury after all evidence has been presented. Closing arguments summarize the evidence, apply the law, and urge the jury to reach a specific verdict. This is NOT evidence — it is attorney argument. The prosecution goes first, then the defense, then the prosecution gets a rebuttal.<div class="example">A strong closing: "The prosecution has not shown you that Freddy Suares knowingly took a protected bird. They've shown you a tragedy — and those are not the same thing."</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="deliberation">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-comments"></i> Deliberation</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The private discussion among jurors after all evidence and closing arguments are complete. Jurors deliberate until they reach a unanimous verdict on each charge. Everything said in deliberations is confidential. Jurors may ask the judge for clarification on legal instructions.<div class="example">During deliberation, jurors might debate: "Does strict liability apply to the MBTA — or must the prosecution show that Freddy knew what he was doing?"</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="verdict">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-gavel"></i> Verdict</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The jury's final decision on each charge. In criminal cases, the verdict is either <strong>Guilty</strong> or <strong>Not Guilty</strong> for each charge. A verdict must be unanimous in most jurisdictions. The verdict is announced in open court by the foreperson.<div class="example">"On the charge of violating the Migratory Bird Treaty Act, Count One — we the jury find the defendant... Not Guilty."</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="acquittal">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-person-circle-xmark"></i> Acquittal</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A Not Guilty verdict — the jury has determined the prosecution did not prove its case beyond a reasonable doubt. Once acquitted, a defendant CANNOT be tried again for the same crime (Double Jeopardy protection). Acquittal does not necessarily mean the defendant is factually innocent.<div class="example">If the jury finds Freddy Not Guilty on the MBTA charges, he is acquitted — and the federal government cannot re-try him for the same incident.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="conviction">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-gavel"></i> Conviction</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">A Guilty verdict — the jury has determined the prosecution proved its case beyond a reasonable doubt. After a conviction, the judge determines the sentence (the punishment). The defendant may appeal a conviction to a higher court.<div class="example">If the UEC Soccer Team is convicted of hazing, the judge would then sentence them — potentially including probation, fines, or community service.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="endangered species protected">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-leaf"></i> Endangered Species / Protected Species</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">Species listed under the Endangered Species Act or other federal/state wildlife protection laws. "Protected species" is a broader category — a bird can be protected under the MBTA without being listed as endangered. The California Spotted Owl is listed as a "species of concern" and is protected under both federal and California law.<div class="example">You don't have to be on the "endangered" list to be protected — the MBTA covers over 1,000 species, including many that are currently common.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="speculation">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-question-circle"></i> Speculation</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">An objection raised when a question asks a witness to guess, assume, or infer something beyond their personal knowledge. Witnesses can only testify to things they personally know — not things they imagine might be true.<div class="example">"What do you think Freddy was planning to do after he climbed the tree?" — objection, calls for speculation. The witness cannot know what Freddy was thinking.</div></div>
+    </div>
+
+    <div class="gloss-item" data-term="authentication authenticate">
+      <div class="gloss-term" onclick="toggleGloss(this)">
+        <div class="gloss-term-name"><i class="fas fa-file-signature"></i> Authentication</div>
+        <i class="fas fa-chevron-down gloss-arrow"></i>
+      </div>
+      <div class="gloss-def">The process of proving that a piece of evidence is what it claims to be. Before the jury can see an exhibit, an attorney must present testimony or other evidence that the item is genuine.<div class="example">Before Exhibit A (the group chat screenshots) can be shown to the jury, a witness must testify that those are real screenshots from the actual team chat — not fabrications.</div></div>
+    </div>
+
+  </div><!-- end glossary list -->
+</section>
+
+
+<!-- ================================================================
+     PAGE: PREPARATION TIPS
+     ================================================================ -->
+<section class="page" id="page-preptips">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Preparation Tips</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon"><i class="fas fa-clipboard-check"></i></div>
+    <h1>Preparation Tips</h1>
+    <div class="subtitle">Checklists for every role — check things off as you prepare</div>
+  </div>
+
+  <div class="pill-tabs">
+    <div class="pill-tab active" onclick="showPrepTab('attorney')"><i class="fas fa-briefcase"></i> Attorney</div>
+    <div class="pill-tab" onclick="showPrepTab('witness')"><i class="fas fa-user-tie"></i> Witness</div>
+    <div class="pill-tab" onclick="showPrepTab('juror')"><i class="fas fa-scale-balanced"></i> Juror</div>
+  </div>
+
+  <!-- ATTORNEY TAB -->
+  <div class="prep-tab" id="prep-attorney">
+    <div class="card">
+      <div class="section-title" style="margin-bottom:16px"><i class="fas fa-list-check"></i> Attorney Preparation Checklist</div>
+      <ul class="checklist" id="checklist-attorney">
+        <li><input type="checkbox" id="a1" onchange="saveCheck(this)"><label for="a1">Read the full fact pattern at least twice — look for inconsistencies and opportunities</label></li>
+        <li><input type="checkbox" id="a2" onchange="saveCheck(this)"><label for="a2">Memorize the elements of each charge you're handling — you must prove (or undermine) EVERY one</label></li>
+        <li><input type="checkbox" id="a3" onchange="saveCheck(this)"><label for="a3">Review every exhibit — know what each one shows and how to use it or challenge it</label></li>
+        <li><input type="checkbox" id="a4" onchange="saveCheck(this)"><label for="a4">Write your opening statement — keep it under 3 minutes, tell a story, and preview your evidence</label></li>
+        <li><input type="checkbox" id="a5" onchange="saveCheck(this)"><label for="a5">Write your closing argument — tie every piece of evidence back to a specific legal element</label></li>
+        <li><input type="checkbox" id="a6" onchange="saveCheck(this)"><label for="a6">Prepare direct examination questions for each of your witnesses — no leading questions!</label></li>
+        <li><input type="checkbox" id="a7" onchange="saveCheck(this)"><label for="a7">Prepare cross-examination questions for opposing witnesses — keep them short and use leading questions</label></li>
+        <li><input type="checkbox" id="a8" onchange="saveCheck(this)"><label for="a8">Know which objections to make and when — practice saying them out loud</label></li>
+        <li><input type="checkbox" id="a9" onchange="saveCheck(this)"><label for="a9">Practice introducing at least two exhibits into evidence — know the exact steps</label></li>
+        <li><input type="checkbox" id="a10" onchange="saveCheck(this)"><label for="a10">Practice with your witnesses at least once — run through Q&amp;A so they're comfortable</label></li>
+        <li><input type="checkbox" id="a11" onchange="saveCheck(this)"><label for="a11">Know the legal standard for your case: strict liability vs. knowing intent (Case 2) or consent is not a defense (Case 1)</label></li>
+        <li><input type="checkbox" id="a12" onchange="saveCheck(this)"><label for="a12">Dress professionally — business casual or formal</label></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="margin-bottom:16px"><i class="fas fa-hand-paper"></i> Common Objections Reference</div>
+      <div class="objection-card">
+        <div class="objection-name"><i class="fas fa-link"></i> Relevance</div>
+        <div class="objection-when">Use when: a question or evidence has nothing to do with the charges</div>
+        <div class="objection-say">Objection, Your Honor — relevance. This evidence is not material to any element of the charge.</div>
+      </div>
+      <div class="objection-card">
+        <div class="objection-name"><i class="fas fa-ear-listen"></i> Hearsay</div>
+        <div class="objection-when">Use when: a witness is testifying about what someone ELSE said, offered to prove the truth</div>
+        <div class="objection-say">Objection, Your Honor — hearsay. The witness is testifying about an out-of-court statement offered for its truth.</div>
+      </div>
+      <div class="objection-card">
+        <div class="objection-name"><i class="fas fa-arrow-right"></i> Leading Question</div>
+        <div class="objection-when">Use when: an attorney uses a yes/no question that suggests the answer on direct examination</div>
+        <div class="objection-say">Objection, Your Honor — the question is leading. Counsel is suggesting the answer to their own witness.</div>
+      </div>
+      <div class="objection-card">
+        <div class="objection-name"><i class="fas fa-layer-group"></i> Lacks Foundation</div>
+        <div class="objection-when">Use when: a piece of evidence is introduced without proper authentication or background</div>
+        <div class="objection-say">Objection, Your Honor — lacks foundation. The witness has not established personal knowledge of this document.</div>
+      </div>
+      <div class="objection-card">
+        <div class="objection-name"><i class="fas fa-question"></i> Calls for Speculation</div>
+        <div class="objection-when">Use when: a question asks a witness to guess or infer beyond what they personally know</div>
+        <div class="objection-say">Objection, Your Honor — calls for speculation. The witness cannot know what another person was thinking.</div>
+      </div>
+      <div class="objection-card">
+        <div class="objection-name"><i class="fas fa-database"></i> Assumes Facts Not in Evidence</div>
+        <div class="objection-when">Use when: a question includes something as true that hasn't been proven yet</div>
+        <div class="objection-say">Objection, Your Honor — assumes facts not in evidence. The premise of that question has not been established.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="margin-bottom:16px"><i class="fas fa-triangle-exclamation"></i> Common Attorney Mistakes to Avoid</div>
+      <ul class="icon-list">
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Asking questions you don't know the answer to on cross</strong> — you might open a door you can't close</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Letting witnesses ramble</strong> — control the pace; you can redirect with "thank you, let me ask a more specific question..."</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Arguing after an objection is overruled</strong> — accept the ruling and move on, or politely note your exception for the record</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Making promises in opening you can't keep</strong> — if you say "the evidence will show X," make sure your witnesses actually establish X</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Forgetting to move exhibits into evidence</strong> — you must formally admit them before the jury can consider them</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Being too aggressive on cross</strong> — juries don't like attorneys who bully witnesses; be pointed, not cruel</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WITNESS TAB -->
+  <div class="prep-tab" id="prep-witness" style="display:none">
+    <div class="card">
+      <div class="section-title" style="margin-bottom:16px"><i class="fas fa-list-check"></i> Witness Preparation Checklist</div>
+      <ul class="checklist" id="checklist-witness">
+        <li><input type="checkbox" id="w1" onchange="saveCheck(this)"><label for="w1">Read your witness profile carefully — know exactly who you are and what you know</label></li>
+        <li><input type="checkbox" id="w2" onchange="saveCheck(this)"><label for="w2">Know ONLY what your character would know — don't testify about things outside your role</label></li>
+        <li><input type="checkbox" id="w3" onchange="saveCheck(this)"><label for="w3">Practice answering questions out loud — don't just read your profile silently</label></li>
+        <li><input type="checkbox" id="w4" onchange="saveCheck(this)"><label for="w4">Prepare for cross-examination — read the "Cross-Examination Watch Out" section for your character</label></li>
+        <li><input type="checkbox" id="w5" onchange="saveCheck(this)"><label for="w5">Practice saying "I don't know" or "I don't recall" — these are valid answers!</label></li>
+        <li><input type="checkbox" id="w6" onchange="saveCheck(this)"><label for="w6">Stay in character throughout — your demeanor matters as much as your words</label></li>
+        <li><input type="checkbox" id="w7" onchange="saveCheck(this)"><label for="w7">Know what exhibits relate to your testimony — be ready to identify them</label></li>
+        <li><input type="checkbox" id="w8" onchange="saveCheck(this)"><label for="w8">Work with your attorney at least once before the trial — know what questions they'll ask</label></li>
+        <li><input type="checkbox" id="w9" onchange="saveCheck(this)"><label for="w9">Dress as your character would dress for a formal court appearance</label></li>
+        <li><input type="checkbox" id="w10" onchange="saveCheck(this)"><label for="w10">Remember: pause, think, THEN answer — never rush a response on cross</label></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="section-title" style="margin-bottom:16px"><i class="fas fa-triangle-exclamation"></i> Common Witness Mistakes to Avoid</div>
+      <ul class="icon-list">
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Volunteering extra information</strong> — answer the question asked, then stop. Don't add "and also..."</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Arguing with opposing counsel</strong> — answer questions calmly, even if the attorney is being aggressive</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Changing your story</strong> — be consistent; if you're caught in a contradiction, acknowledge it calmly</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Looking at your attorney for help</strong> — you must answer questions on your own during cross</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Guessing</strong> — if you don't know, say so. Guessing wrong is worse than saying "I'm not sure."</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- JUROR TAB -->
+  <div class="prep-tab" id="prep-juror" style="display:none">
+    <div class="card">
+      <div class="section-title" style="margin-bottom:16px"><i class="fas fa-list-check"></i> Juror Preparation Checklist</div>
+      <ul class="checklist" id="checklist-juror">
+        <li><input type="checkbox" id="j1" onchange="saveCheck(this)"><label for="j1">Read the fact pattern for both cases — understand what happened before the trial begins</label></li>
+        <li><input type="checkbox" id="j2" onchange="saveCheck(this)"><label for="j2">Review the legal standards — what must be proven for each charge?</label></li>
+        <li><input type="checkbox" id="j3" onchange="saveCheck(this)"><label for="j3">Understand "beyond a reasonable doubt" — know what that standard actually means</label></li>
+        <li><input type="checkbox" id="j4" onchange="saveCheck(this)"><label for="j4">Bring a notepad and pen — take notes during testimony</label></li>
+        <li><input type="checkbox" id="j5" onchange="saveCheck(this)"><label for="j5">Keep an open mind — don't form opinions before closing arguments</label></li>
+        <li><input type="checkbox" id="j6" onchange="saveCheck(this)"><label for="j6">Pay attention to witness credibility — who seems honest? Who seems coached?</label></li>
+        <li><input type="checkbox" id="j7" onchange="saveCheck(this)"><label for="j7">Understand that the defense does NOT have to prove anything — guilt must be proven to you</label></li>
+        <li><input type="checkbox" id="j8" onchange="saveCheck(this)"><label for="j8">Review the Key Legal Questions page before the trial</label></li>
+        <li><input type="checkbox" id="j9" onchange="saveCheck(this)"><label for="j9">Be ready to participate actively in deliberation — share your views and listen to others</label></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="section-title" style="margin-bottom:16px"><i class="fas fa-triangle-exclamation"></i> Common Juror Mistakes to Avoid</div>
+      <ul class="icon-list">
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Deciding too early</strong> — listen to ALL the evidence before forming a verdict</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Basing your verdict on sympathy</strong> — feel for Freddy if you want, but base your vote on the law and the evidence</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Caving to peer pressure</strong> — if you have real doubt, hold your ground. A unanimous verdict must be honest.</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Confusing "probably guilty" with "proven guilty"</strong> — probably isn't enough. The standard is beyond a reasonable doubt.</li>
+        <li><i class="fas fa-xmark" style="color:var(--red)"></i> <strong>Ignoring jury instructions</strong> — the judge's instructions are the law. Follow them even if you disagree personally.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="motivational">
+    <h3><i class="fas fa-star"></i> You've Got This</h3>
+    <p>Mock trial isn't just a class exercise — it's a chance to step into roles that real professionals spend years training for. Every attorney who has ever stood before a jury started exactly where you are now: preparing, practicing, and feeling a little nervous. That nervousness means you care. Channel it. Know your material, trust your preparation, and remember: in this courtroom, <strong>your voice matters</strong>. Whatever role you're playing, play it with conviction. The jury is watching — so make them listen.</p>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     PAGE: KEY LEGAL QUESTIONS
+     ================================================================ -->
+<section class="page" id="page-keyquestions">
+  <div class="breadcrumb">
+    <span class="crumb" onclick="showPage('home')" style="cursor:pointer"><i class="fas fa-home"></i> Home</span>
+    <span class="sep">/</span>
+    <span class="crumb current">Key Legal Questions</span>
+  </div>
+
+  <div class="page-header">
+    <div class="header-icon"><i class="fas fa-question-circle"></i></div>
+    <h1>Key Legal Questions</h1>
+    <div class="subtitle">The central questions the jury must answer — discussion guide for both cases</div>
+  </div>
+
+  <div class="callout navy">
+    <i class="fas fa-lightbulb"></i>
+    <div>
+      <div class="callout-title">How to Use This Page</div>
+      <p>These are the real questions the jury will wrestle with. For each one, we've laid out the strongest arguments on both sides. Use this page to prepare your arguments — or to anticipate what the other side will say.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-users"></i> Case 1: Hazing Questions</div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">1</div>
+      <div class="question-text">Does a tradition qualify as hazing even when no one explicitly ordered new members to participate?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> Arguments FOR Hazing</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> Social pressure can be just as coercive as explicit orders</li>
+          <li><i class="fas fa-check"></i> The group chat celebrated risky behavior and mocked "ordinary" charms</li>
+          <li><i class="fas fa-check"></i> Expert: implicit traditions are recognized as the most coercive form of hazing</li>
+          <li><i class="fas fa-check"></i> Freddy's playing time and friendships depended on participating</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> Arguments AGAINST Hazing</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> No one ever told Freddy to do anything dangerous</li>
+          <li><i class="fas fa-times"></i> The statute says hazing "causes or is likely to cause" injury — was this tradition likely to cause injury?</li>
+          <li><i class="fas fa-times"></i> Freddy's specific action was far beyond any prior example</li>
+          <li><i class="fas fa-times"></i> The tradition had run for six years without any injury</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">2</div>
+      <div class="question-text">Is consent a defense to hazing under California law — and if not, should it affect how we view the severity of the conduct?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> Arguments FOR Conviction (Consent Is Irrelevant)</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> California Education Code § 32050 explicitly says consent is NOT a defense</li>
+          <li><i class="fas fa-check"></i> Consent in hazing is never truly free when social belonging is at stake</li>
+          <li><i class="fas fa-check"></i> The legislature chose to remove consent as a defense — courts should honor that choice</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> Arguments FOR Acquittal (Consent Still Matters)</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> Even if consent isn't a legal defense, it should affect the degree of moral culpability</li>
+          <li><i class="fas fa-times"></i> Freddy was an adult who made a fully autonomous decision</li>
+          <li><i class="fas fa-times"></i> Punishing team leaders for what a willing participant voluntarily chose raises fairness concerns</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">3</div>
+      <div class="question-text">How much responsibility do team leaders bear for a tradition they didn't start and didn't explicitly endorse?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> Arguments FOR Responsibility</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> Marco and Sofia are named captains — leadership comes with accountability</li>
+          <li><i class="fas fa-check"></i> They were in the group chat and saw the risky selfie examples praised</li>
+          <li><i class="fas fa-check"></i> They never corrected the tradition or made optionality explicit</li>
+          <li><i class="fas fa-check"></i> The tradition was well-established enough to have six years of precedent</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> Arguments AGAINST Responsibility</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> Neither Marco nor Sofia created the tradition or gave instructions</li>
+          <li><i class="fas fa-times"></i> Freddy never told anyone what he was planning</li>
+          <li><i class="fas fa-times"></i> You can't be criminally responsible for what you didn't know and couldn't foresee</li>
+          <li><i class="fas fa-times"></i> The tradition had never caused harm before — foreseeability of danger was low</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">4</div>
+      <div class="question-text">Did the good luck charm tradition foreseeably incentivize dangerous behavior, even if dangerous behavior was never explicitly encouraged?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> Yes — It Was Foreseeable</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> The group chat showed and celebrated multiple risky selfies</li>
+          <li><i class="fas fa-check"></i> "Unique and impressive" + "somewhere no one would expect" logically leads toward risk</li>
+          <li><i class="fas fa-check"></i> A reasonable person in Marco's position should have foreseen escalation</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> No — Not Foreseeable</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> Prior selfies showed safe but unusual locations — not 18 feet up a tree</li>
+          <li><i class="fas fa-times"></i> Freddy's specific interpretation was far beyond any established norm</li>
+          <li><i class="fas fa-times"></i> There is a difference between creative and dangerous</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-title"><i class="fas fa-feather-pointed"></i> Case 2: MBTA Questions</div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">5</div>
+      <div class="question-text">Does the MBTA require knowing intent for criminal liability, or does it impose strict liability regardless of purpose?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> Strict Liability Applies</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> The plain text says "it shall be unlawful" — no intent requirement mentioned</li>
+          <li><i class="fas fa-check"></i> Congress chose not to include an intent element — courts should respect that</li>
+          <li><i class="fas fa-check"></i> Protecting endangered birds is a compelling government interest that justifies strict liability</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> Intent Is Required</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> Federal courts are split — several circuits require knowing conduct for criminal prosecution</li>
+          <li><i class="fas fa-times"></i> Criminal law traditionally requires mens rea — strict liability is the exception, not the rule</li>
+          <li><i class="fas fa-times"></i> Applying strict liability here would criminalize anyone who accidentally kills a bird</li>
+          <li><i class="fas fa-times"></i> The MBTA was written to target hunters and commercial interests, not individuals</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">6</div>
+      <div class="question-text">Can a defendant "take" a protected bird by climbing near its nest if he never touched the bird or nest?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> Yes — Indirect Actions Count</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> The MBTA broadly prohibits "pursue, hunt, take, capture, kill" — a wide spectrum of actions</li>
+          <li><i class="fas fa-check"></i> The chicks died as a direct result of Freddy's choice to climb toward the nest</li>
+          <li><i class="fas fa-check"></i> The law's purpose — protecting birds — would be undermined by a narrow "must touch the bird" reading</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> No — He Never Took Anything</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> Freddy never pursued, hunted, captured, or touched the birds</li>
+          <li><i class="fas fa-times"></i> The branch failure was a freak accident — not an intentional act toward the nest</li>
+          <li><i class="fas fa-times"></i> Reading "take" this broadly would create unlimited criminal exposure for anyone near wildlife</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">7</div>
+      <div class="question-text">Does the weakened branch constitute a superseding cause that reduces or eliminates Freddy's criminal liability?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> No — Freddy Remains the Proximate Cause</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> Freddy chose to climb a tree — the branch condition was a foreseeable risk</li>
+          <li><i class="fas fa-check"></i> He didn't test the branch's stability before trusting it with his full weight</li>
+          <li><i class="fas fa-check"></i> A superseding cause must be truly unforeseeable — a weak branch in a neglected tree is foreseeable</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> Yes — The University Bears Responsibility</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> The arborist found the branch was structurally compromised before Freddy arrived</li>
+          <li><i class="fas fa-times"></i> The branch would have failed under ANY adult's weight — Freddy's presence wasn't the decisive factor</li>
+          <li><i class="fas fa-times"></i> The university's failure to inspect the storm-damaged tree broke the causal chain</li>
+          <li><i class="fas fa-times"></i> Freddy had no way to know the branch was internally decayed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-header">
+      <div class="question-num">8</div>
+      <div class="question-text">Is it relevant that Freddy's purpose was a selfie — an act millions of people engage in near wildlife every day?</div>
+    </div>
+    <div class="question-body">
+      <div class="for-side">
+        <div class="side-label for-label"><i class="fas fa-hammer"></i> No — Purpose Doesn't Matter</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-check"></i> The harm to the birds was the same regardless of Freddy's reason for climbing</li>
+          <li><i class="fas fa-check"></i> If strict liability applies, the "why" is irrelevant by definition</li>
+          <li><i class="fas fa-check"></i> People taking selfies near wildlife cause documented harm to protected species nationwide</li>
+        </ul>
+      </div>
+      <div class="against-side">
+        <div class="side-label against-label"><i class="fas fa-shield-halved"></i> Yes — Context Matters for Fairness</div>
+        <ul class="arg-list">
+          <li><i class="fas fa-times"></i> Criminalizing selfie behavior would expose millions of ordinary people to federal prosecution</li>
+          <li><i class="fas fa-times"></i> The MBTA was designed for hunters and industrial actors, not photographers</li>
+          <li><i class="fas fa-times"></i> Prosecutorial discretion should account for the absence of harmful intent</li>
+          <li><i class="fas fa-times"></i> A conviction here would set an alarming precedent with no logical stopping point</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main><!-- end #main -->
+</div><!-- end #layout -->
+
+<script>
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function showPage(id) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target
+  const target = document.getElementById('page-' + id);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // Update nav items
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navItems = document.querySelectorAll('.nav-item');
+  const pageMap = {
+    home: 0, case1: 1, case2: 2, witnesses: 3,
+    howtrial: 4, roles: 5, glossary: 6, preptips: 7, keyquestions: 8
+  };
+  if (pageMap[id] !== undefined && navItems[pageMap[id]]) {
+    navItems[pageMap[id]].classList.add('active');
+  }
+  // Close sidebar on mobile
+  closeSidebar();
+}
+
+/* ============================================================
+   SIDEBAR TOGGLE (MOBILE)
+   ============================================================ */
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+/* ============================================================
+   WITNESS FILTER
+   ============================================================ */
+function filterWitnesses(filter, btn) {
+  // Update button states
+  document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.witness-card');
+  cards.forEach(card => {
+    if (filter === 'all') {
+      card.classList.remove('hidden');
+    } else if (filter === 'prosecution' || filter === 'defense') {
+      const side = card.dataset.side;
+      card.classList.toggle('hidden', side !== filter);
+    } else {
+      // case1 or case2
+      const cases = card.dataset.case || '';
+      card.classList.toggle('hidden', !cases.includes(filter));
+    }
+  });
+}
+
+/* ============================================================
+   GLOSSARY TOGGLE & SEARCH
+   ============================================================ */
+function toggleGloss(termEl) {
+  const item = termEl.closest('.gloss-item');
+  item.classList.toggle('open');
+}
+
+function filterGlossary(query) {
+  const q = query.toLowerCase().trim();
+  const items = document.querySelectorAll('.gloss-item');
+  let visCount = 0;
+
+  items.forEach(item => {
+    const term = item.dataset.term || '';
+    const text = item.textContent.toLowerCase();
+    const match = !q || term.includes(q) || text.includes(q);
+    item.classList.toggle('hidden', !match);
+    if (match) visCount++;
+  });
+
+  const countEl = document.getElementById('glossaryCount');
+  if (q) {
+    countEl.textContent = `Showing ${visCount} of ${items.length} terms`;
+  } else {
+    countEl.textContent = `${items.length} terms — click any to expand`;
+  }
+}
+
+// Initialize glossary count
+window.addEventListener('DOMContentLoaded', () => {
+  filterGlossary('');
+  loadCheckboxes();
+});
+
+/* ============================================================
+   PREP TIPS TABS
+   ============================================================ */
+function showPrepTab(tab) {
+  document.querySelectorAll('.prep-tab').forEach(t => t.style.display = 'none');
+  document.getElementById('prep-' + tab).style.display = 'block';
+  document.querySelectorAll('.pill-tab').forEach(t => t.classList.remove('active'));
+  const tabs = ['attorney', 'witness', 'juror'];
+  const idx = tabs.indexOf(tab);
+  document.querySelectorAll('.pill-tab')[idx].classList.add('active');
+}
+
+/* ============================================================
+   LOCALSTORAGE CHECKLISTS
+   ============================================================ */
+function saveCheck(checkbox) {
+  localStorage.setItem('check_' + checkbox.id, checkbox.checked ? '1' : '0');
+}
+
+function loadCheckboxes() {
+  document.querySelectorAll('.checklist input[type="checkbox"]').forEach(cb => {
+    const saved = localStorage.getItem('check_' + cb.id);
+    if (saved === '1') cb.checked = true;
+  });
+}
+</script>
+</body>
+</html>
