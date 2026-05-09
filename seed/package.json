@@ -1,0 +1,11 @@
+{
+  "name": "emileworkout-seed",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "seed": "node seed.mjs"
+  },
+  "dependencies": {
+    "firebase": "^10.0.0"
+  }
+}

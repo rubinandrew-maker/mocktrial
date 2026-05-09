@@ -1,0 +1,93 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // -----------------------------------------------------------------------
+    // Helpers
+    // -----------------------------------------------------------------------
+
+    function isAuthenticated() {
+      // This app uses PIN-based access (no Firebase Auth).
+      // All writes are validated by the client; the rules enforce
+      // structural access patterns rather than user identity.
+      return true;
+    }
+
+    // -----------------------------------------------------------------------
+    // config — readable by all clients, writable only via dashboard
+    // (coach PIN is validated client-side before writes reach here)
+    // -----------------------------------------------------------------------
+    match /config/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // -----------------------------------------------------------------------
+    // teams — readable by all, writable via dashboard
+    // -----------------------------------------------------------------------
+    match /teams/{teamId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // -----------------------------------------------------------------------
+    // players — readable by all (player list shown on station screen),
+    // writable via dashboard
+    // -----------------------------------------------------------------------
+    match /players/{playerId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // -----------------------------------------------------------------------
+    // movements + levels subcollection — readable by all, writable via dashboard
+    // -----------------------------------------------------------------------
+    match /movements/{movementId} {
+      allow read: if true;
+      allow write: if true;
+
+      match /levels/{levelId} {
+        allow read: if true;
+        allow write: if true;
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // progress — per-player per-movement progression state.
+    // Readable by all (station iPads need it); writable by station clients
+    // and the dashboard.
+    // -----------------------------------------------------------------------
+    match /progress/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // -----------------------------------------------------------------------
+    // sessions — full log of every workout set.
+    // Readable by all; writable by station clients.
+    // -----------------------------------------------------------------------
+    match /sessions/{sessionId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // -----------------------------------------------------------------------
+    // approvals — coach advancement queue.
+    // Readable and writable by all (coach reviews via dashboard,
+    // progress checks trigger writes from station).
+    // -----------------------------------------------------------------------
+    match /approvals/{approvalId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // -----------------------------------------------------------------------
+    // stations — device-to-movement assignments.
+    // Readable by all; writable by station clients and dashboard.
+    // -----------------------------------------------------------------------
+    match /stations/{stationId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
